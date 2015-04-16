@@ -7,15 +7,18 @@ import static org.junit.Assert.*;
 import game.*;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class GameTests {
 
+	private Game game; 
+	
 	@Before	// initialize a Game with a list of targets
 	public void setUp() {
-		
+		game = new Game();
 	}
 
 	
@@ -30,7 +33,7 @@ public class GameTests {
 	
 	
 	@Test // target contain method returns expected boolean
-	public void targetContains(){
+	public void targetContainsPoint(){
 		Target tar = new RectangleTarget(0, 0, 5, 5);	
 		// Square is easiest target to test contains for, should add other Target implementations as we go
 		Point inside = new Point(2,3);
@@ -42,24 +45,7 @@ public class GameTests {
 		// tar = new PolygonTarget(.....
 	}
 	
-	/*
-	 * 		Decide that these are probably unnecessary tests
-	 * 
-	
-	@Test // that targets spawn in desired panel/area 
-	public void targetsOnScreen() {
-		fail("Not yet implemented");
-	}
-	
-	@Test	// that targets do not spawn on tank/HUD
-	public void noTargetsOnOtherComponents() {
-		fail("Not yet implemented");
-	} 
-	
-	*
-	*
-	*/
-	
+
 	@Test	// that targets do not spawn over each other
 	public void twoTargetsContain() {
 		Target tarOne = new RectangleTarget(0, 0, 10, 10);
@@ -70,8 +56,6 @@ public class GameTests {
 		assertFalse(tarOne.contains(tarTwo));
 	}
 	
-	
-
 	@Test	// that when barrelAngle is set, it changes to appropriate angle (including the gui coords)
 	public void correctBarrelAngle() {
 		Player p = new Player();
@@ -95,4 +79,36 @@ public class GameTests {
 		angle = p.checkAngle();
 		assertEquals(angle, 23);
 	}
+	
+	@Test // that no targets overlap
+	public void noTargetsOverlap() {
+		ArrayList<Target> targets = game.spawnTargets();
+		Target iTar, jTar;
+		// For all targets in the list, make sure no targets after it in the list overlap
+		for(int i = 0; i < targets.size(); i++) {
+			iTar = targets.get(i);
+			for(int j = i; j < targets.size(); j++) {
+				jTar = targets.get(j);
+				assertFalse(iTar.contains(jTar));
+			}
+		}
+	}
+	
+	/*
+	 * 		Decide that these are probably unnecessary tests
+	 * 
+	
+	@Test // that targets spawn in desired panel/area 
+	public void targetsOnScreen() {
+		fail("Not yet implemented");
+	}
+	
+	@Test	// that targets do not spawn on tank/HUD
+	public void noTargetsOnOtherComponents() {
+		fail("Not yet implemented");
+	} 
+	
+	*
+	*
+	*/
 }
