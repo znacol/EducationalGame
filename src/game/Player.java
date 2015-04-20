@@ -1,14 +1,19 @@
 package game;
 
 public class Player {
+	private int score;
+	private int barrelAngle;
 
-	public void setBarrelAngle(int i) {
-		
+	public void setBarrelAngle(int barrelAngle) {
+		this.barrelAngle = barrelAngle;
 	}
 
-	public int checkAngle() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int checkAngle() {return barrelAngle;}
+	
+	public void setScore(int score){
+		this.score = score;
 	}
+	
+	public int getScore(){return score;}
 
 }

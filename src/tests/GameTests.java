@@ -82,12 +82,13 @@ public class GameTests {
 	
 	@Test // that no targets overlap
 	public void noTargetsOverlap() {
-		ArrayList<Target> targets = game.spawnTargets();
+		game.spawnTargets();
+		ArrayList<Target> targets = game.getTargets();
 		Target iTar, jTar;
 		// For all targets in the list, make sure no targets after it in the list overlap
 		for(int i = 0; i < targets.size(); i++) {
 			iTar = targets.get(i);
-			for(int j = i; j < targets.size(); j++) {
+			for(int j = i + 1; j < targets.size(); j++) {
 				jTar = targets.get(j);
 				assertFalse(iTar.contains(jTar));
 			}
