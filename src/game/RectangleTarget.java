@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
@@ -33,6 +35,12 @@ public class RectangleTarget extends Target {
 		if(rect.intersects(otherRect))
 			return true;
 		return false;
+	}
+	
+	// Should randomize color of target.
+	public void draw(Graphics g) {
+		g.setColor(Color.BLUE);
+		g.fillRect(x, y, width, height);
 	}
 
 	public int getX() {return x;}

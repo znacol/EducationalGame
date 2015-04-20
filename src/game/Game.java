@@ -1,9 +1,18 @@
 package game;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game {
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class Game extends JFrame {
 	private final int NUM_TARGETS = 10;
 	// Max and min sizes for targets
 	private final int TAR_MAX = 20;
@@ -13,11 +22,31 @@ public class Game {
 	private final int WIDTH = 800;
 	private final int HEIGHT = 800;
 
+	Player player;
 	ArrayList<Target> targets;
+	
+	public static void main(String[] args){
+		new Game();
+	}
 
 	public Game() {
 		targets = new ArrayList<Target>();
+		player = new Player();
+		spawnTargets();
+		initGUI();
 	}
+	
+	public void initGUI(){ 
+		setTitle("Geometry Game!");
+		setSize(700, 700);
+		setDefaultCloseOperation(EXIT_ON_CLOSE); 
+
+		HUD hud = new HUD(this);
+
+		add(hud, BorderLayout.WEST);
+
+		setVisible(true);
+	} 
 
 	public void spawnTargets() {
 		Random rand = new Random();
@@ -42,9 +71,18 @@ public class Game {
 			contains = false;
 		}
 	}
+	
+	// Not working- needs to be in panel maybe??
+	/*@Override
+	public void paintComponent(Graphics g) {
+		for(Target i : targets){
+			i.draw(g);
+		}
+		player.draw(g);
+	}*/
+	
+	public ArrayList<Target> getTargets(){return targets;}
 
-	public ArrayList<Target> getTargets(){
-		return targets;
-	}
+	public Player getPlayer() {return player;}
 
 }
