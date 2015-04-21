@@ -1,17 +1,12 @@
 package game;
 
 import java.awt.BorderLayout;
-
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GridLayout;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 public class Game extends JFrame {
@@ -21,8 +16,9 @@ public class Game extends JFrame {
 	private final int TAR_MIN = 8;
 
 	// Window dimensions
-	private final int WIDTH = 800;
-	private final int HEIGHT = 800;
+	private final int WIDTH = 700;
+	private final int HEIGHT = 700;
+	private final int HUD_WIDTH = 150;
 	
 	private JPanel hud, playPanel;
 
@@ -42,13 +38,12 @@ public class Game extends JFrame {
 	
 	public void initGUI(){ 
 		setTitle("Geometry Game!");
-		setSize(700, 700);
+		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
 
 		hud = new HUD(this);
-		hud.setPreferredSize(new Dimension(150 ,0));
-
+		hud.setPreferredSize(new Dimension(HUD_WIDTH ,0));
 		add(hud, BorderLayout.WEST);
 		
 		playPanel = new PlayPanel(targets, player);
@@ -61,7 +56,7 @@ public class Game extends JFrame {
 		Random rand = new Random();
 		boolean contains = false;
 		for(int i = 0; i < NUM_TARGETS; i++) {
-			int x = rand.nextInt(WIDTH) + HUD.WIDTH;
+			int x = rand.nextInt(WIDTH - HUD_WIDTH) + 1;
 			int y = rand.nextInt(HEIGHT) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;
