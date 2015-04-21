@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.Random;
 
 public class RectangleTarget extends Target {
 	private int x;
@@ -12,6 +13,7 @@ public class RectangleTarget extends Target {
 	private int height;
 	
 	public RectangleTarget(int x, int y, int width, int height) {
+		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -39,10 +41,10 @@ public class RectangleTarget extends Target {
 	
 	// Should randomize color of target.
 	public void draw(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(color);
 		g.fillRect(x, y, width, height);
 	}
-
+	
 	public int getX() {return x;}
 	public int getY() {return y;}
 	public int getWidth() {return width;}
