@@ -1,15 +1,11 @@
 package game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Game extends JFrame {
@@ -21,6 +17,8 @@ public class Game extends JFrame {
 	// Window dimensions
 	private final int WIDTH = 800;
 	private final int HEIGHT = 800;
+	
+	private JPanel hud, playPanel;
 
 	Player player;
 	ArrayList<Target> targets;
@@ -41,10 +39,12 @@ public class Game extends JFrame {
 		setSize(700, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
-		HUD hud = new HUD(this);
-
+		hud = new HUD(this);
 		add(hud, BorderLayout.WEST);
-
+		
+		playPanel = new PlayPanel(targets, player);
+		add(playPanel, BorderLayout.CENTER);
+		
 		setVisible(true);
 	} 
 
@@ -71,15 +71,6 @@ public class Game extends JFrame {
 			contains = false;
 		}
 	}
-	
-	// Not working- needs to be in panel maybe??
-	/*@Override
-	public void paintComponent(Graphics g) {
-		for(Target i : targets){
-			i.draw(g);
-		}
-		player.draw(g);
-	}*/
 	
 	public ArrayList<Target> getTargets(){return targets;}
 
