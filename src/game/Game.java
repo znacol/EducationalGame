@@ -2,6 +2,7 @@ package game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
 		HUD hud = new HUD(this);
-
+		hud.setPreferredSize(new Dimension(150 ,0));
+		//hud.setMaximumSize(new Dimension(500 ,150));
 		add(hud, BorderLayout.WEST);
 
 		setVisible(true);
