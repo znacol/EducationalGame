@@ -1,6 +1,12 @@
 package game;
 
 import java.awt.BorderLayout;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -39,7 +45,10 @@ public class Game extends JFrame {
 		setSize(700, 700);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
+
 		hud = new HUD(this);
+		hud.setPreferredSize(new Dimension(150 ,0));
+
 		add(hud, BorderLayout.WEST);
 		
 		playPanel = new PlayPanel(targets, player);
