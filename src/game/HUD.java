@@ -3,10 +3,13 @@ package game;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -20,81 +23,63 @@ public class HUD extends JPanel {
 
 	private Game game;
 	private JPanel scorePanel, challengePanel, anglePanel;
+	private JLabel score;
 	private JTextField angle;
-	private JTextArea display;
-
-
+	private JTextArea challenge;
 
 	public HUD(Game game) {
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		//setPreferredSize(new Dimension())
-
 		this.game = game;
-		JPanel scorePanel = scorePanel();
+		scorePanel = scorePanel();
 		add(scorePanel);
 
-		JPanel challengePanel = challengePanel();
+		challengePanel = challengePanel();
 		add(challengePanel);
 
-		JPanel anglePanel = anglePanel();
+		anglePanel = anglePanel();
 		add(anglePanel);
 	}
 
 	public JPanel scorePanel() {
-		//setPreferredSize(new Dimension(100, 300));
 		JPanel panel = new JPanel();
-		display = new JTextArea();
-		display.setLineWrap(true);
-		display.setEditable(false);
-		display.setFont(new Font("SansSerif", Font.BOLD, 20));
-		display.setText("Score: " + "\n" + Integer.toString(game.getPlayer().getScore()));
-		panel.add(display);
+		String pScore = Integer.toString(game.getPlayer().getScore());
+		score = new JLabel();
+		score.setText("Score: " + pScore);
+		panel.add(score);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		return panel;
-
 	}
 
 	public JPanel challengePanel() {
-		//setPreferredSize(new Dimension(100, 400));
 		JPanel panel = new JPanel();
-		display = new JTextArea();
-		display.setLineWrap(true);
-		display.setEditable(false);
-		display.setFont(new Font("SansSerif", Font.BOLD, 20));
-		display.setText("Challenge Question!");
-		panel.add(display);
+		panel.add(new JLabel("Challenge Question: "));
+		challenge = new JTextArea();
+		challenge.setLineWrap(true);
+		challenge.setEditable(false);
+		challenge.setFont(new Font("SansSerif", Font.BOLD, 20));
+		panel.add(challenge);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		return panel;
 	}
 
 	public JPanel anglePanel() {
-		JTextArea enterAngle = new JTextArea(50,300);
+		JLabel label = new JLabel("Enter the new Barrel Angle: ");
 		JPanel panel = new JPanel();
-
-	//	enterAngle = new JTextArea();
-	//	enterAngle.setLineWrap(true);
-	//	enterAngle.setEditable(false);
-	//	display.setWrapStyleWord(true);
-	//	enterAngle.setFont(new Font("SansSerif", Font.BOLD, 20));
-	//	enterAngle.setText("Enter angle: ");
-	//	panel.add(enterAngle);
-		
-		angle = new JTextField();
-		angle.setPreferredSize(new Dimension(100, 100));
+		angle = new JTextField(10);
 		angle.setFont(new Font("SansSerif", Font.BOLD, 12));
-		angle.addFocusListener(new NameListener());
+		JButton submit = new JButton("Set Barrel Angle");
+		// When the submit button is clicked, the barrel should move
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				int newAng = Integer.parseInt(angle.getText());
+				game.getPlayer().setBarrelAngle(newAng);
+			}
+		});
+		panel.add(label);
 		panel.add(angle);
+		panel.add(submit);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		return panel;
 	}
-	
-	private class NameListener implements FocusListener {
-		public void focusGained(FocusEvent e){
-			angle.setText(angle.getText());
-		}
-		public void focusLost(FocusEvent e) {
-			angle.setText(angle.getText());
-		}
-	}
-	
-
-
-
 }

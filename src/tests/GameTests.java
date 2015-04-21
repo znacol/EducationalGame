@@ -1,7 +1,5 @@
 package tests;
 
-
-
 import static org.junit.Assert.*;
 
 import game.*;
@@ -31,7 +29,6 @@ public class GameTests {
 	 * 
 	 */
 	
-	
 	@Test // target contain method returns expected boolean
 	public void targetContainsPoint(){
 		Target tar = new RectangleTarget(0, 0, 5, 5);	
@@ -45,7 +42,6 @@ public class GameTests {
 		// tar = new PolygonTarget(.....
 	}
 	
-
 	@Test	// that targets do not spawn over each other
 	public void twoTargetsContain() {
 		Target tarOne = new RectangleTarget(0, 0, 10, 10);
