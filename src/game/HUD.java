@@ -69,7 +69,7 @@ public class HUD extends JPanel {
 	}
 
 	public JPanel anglePanel() {
-		JLabel label = new JLabel("Enter the new Barrel Angle: ");
+		JLabel label = new JLabel("Barrel Angle: ");
 		JPanel panel = new JPanel();
 		angle = new JTextField();
 		angle.setMaximumSize(new Dimension(500,25));
