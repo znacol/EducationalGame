@@ -15,6 +15,10 @@ public class Player {
 	public Player(int x, int y) {
 		this.x = x;
 		this.y = y;
+		init();
+	}
+	
+	public void init() {
 		score = 0;
 		barrelStart = new Point(x + baseDimension / 2, y + baseDimension / 2);
 		barrelEnd = calcBarrelEnd();
@@ -27,18 +31,30 @@ public class Player {
 		y += barrelStart.getY();
 		double x = Math.cos(barrelAngle) * barrelLength;
 		x += barrelStart.getX();
-		e.x = (int) x;
-		e.y = (int) y;
+		e.setLocation(x, y);
 		return e;
 	}
 	
-	public Player() { score = 0; }
+	public Player() { 
+		x = 250;
+		y = 600;
+		init();	
+	}
 
 	public void setBarrelAngle(int barrelAngle) {
 		this.barrelAngle = barrelAngle;
+		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
 	}
 
-	public int checkAngle() {return barrelAngle;}
+	// Should return the calculated angle from the points forming the graphic barrel! ?
+	public int checkAngle() {
+		double dx = Math.abs(barrelStart.getX() - barrelEnd.getX());
+		double dy = Math.abs(barrelStart.getY() - barrelEnd.getY());
+		double cosCalc = Math.acos(dx / barrelLength);
+		double sinCalc = Math.asin(dy / barrelLength);
+		double avg = (cosCalc + sinCalc) / 2;
+		return (int) avg;
+	}
 	
 	public void setScore(int score){
 		this.score = score;
@@ -56,5 +72,6 @@ public class Player {
 		int y2 = (int) barrelEnd.getY();
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 	}
-
+	
+	public int getAngle() { return barrelAngle; }
 }
