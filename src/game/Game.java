@@ -41,7 +41,6 @@ public class Game extends JFrame {
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
-
 		hud = new HUD(this);
 		hud.setPreferredSize(new Dimension(HUD_WIDTH ,0));
 		add(hud, BorderLayout.WEST);

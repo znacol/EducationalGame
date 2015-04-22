@@ -8,7 +8,7 @@ public class Player {
 	private int score;
 	private int barrelAngle;
 	private static int baseDimension = 50;
-	private int x, y;
+	private int x, y;	// the initial point for drawRect() for the "base" of the Player/tank
 	private int barrelLength = 50;
 	private Point barrelStart, barrelEnd;
 	
@@ -21,17 +21,22 @@ public class Player {
 	public void init() {
 		score = 0;
 		barrelStart = new Point(x + baseDimension / 2, y + baseDimension / 2);
+		// take shift off y param to make barrelStart on top edge of Player base
 		barrelEnd = calcBarrelEnd();
 	}
 	
-	// Use trig to calculate where the end point for the line of the barrel
+	// Use trig to calculate the end point for the line of the barrel based on angle and length
 	public Point calcBarrelEnd() {
 		Point e = new Point();
 		double y = Math.sin(barrelAngle) * barrelLength;
 		y += barrelStart.getY();
 		double x = Math.cos(barrelAngle) * barrelLength;
 		x += barrelStart.getX();
-		e.setLocation(x, y);
+		double pythag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+		if(pythag != barrelLength) {
+			System.out.println(pythag + " = x^2 + y^2 does not equal the barrelLength when calculating new endpoints...");
+		}
+		e.setLocation(x, y);	// allows setting Point x/y as double
 		return e;
 	}
 	
@@ -41,6 +46,7 @@ public class Player {
 		init();	
 	}
 
+	// take in the new barrelAngle, set the instance's and then recalculate the endpoint for the barrel's line
 	public void setBarrelAngle(int barrelAngle) {
 		this.barrelAngle = barrelAngle;
 		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
@@ -50,8 +56,10 @@ public class Player {
 	public int checkAngle() {
 		double dx = Math.abs(barrelStart.getX() - barrelEnd.getX());
 		double dy = Math.abs(barrelStart.getY() - barrelEnd.getY());
-		double cosCalc = Math.acos(dx / barrelLength);
-		double sinCalc = Math.asin(dy / barrelLength);
+		double cosCalc = Math.toDegrees(Math.acos(dx / barrelLength));
+		double sinCalc = Math.toDegrees(Math.asin(dy / barrelLength));
+		System.out.println("dx: " + dx + ", dy: " + dy);
+		System.out.println("arccos(x/barrelLength): " + cosCalc + ", arcsin(y/barrelLength): " + sinCalc);
 		double avg = (cosCalc + sinCalc) / 2;
 		return (int) avg;
 	}
@@ -62,7 +70,7 @@ public class Player {
 	
 	public int getScore(){return score;}
 	
-	// Player is just a rectangle for now. Need to change.
+	// Player is a rectangle with a line.
 	public void draw(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.drawRect(x, y, baseDimension, baseDimension);
