@@ -31,7 +31,7 @@ public class Game extends JFrame {
 
 	public Game() {
 		targets = new ArrayList<Target>();
-		player = new Player(250,600, this);
+		player = new Player(250,600);
 		spawnTargets();
 		initGUI();
 	}

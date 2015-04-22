@@ -66,15 +66,16 @@ public class HUD extends JPanel {
 		angle = new JTextField();
 		angle.setMaximumSize(new Dimension(500,25));
 		angle.setFont(new Font("SansSerif", Font.BOLD, 12));
-		JButton submit = new JButton("Set Barrel Angle");
+		JButton setAngleButton = new JButton("Set Barrel Angle");
 		// When the submit button is clicked, the barrel should move
-		submit.addActionListener(new ActionListener() {
+		setAngleButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent ae) {
 				String input = angle.getText();
 				int newAng = 0;
 				if(input.length() > 0) {
-					newAng = Integer.parseInt(angle.getText());	
+					newAng = Integer.parseInt(angle.getText());
+					game.repaintGame();
 				}
 				game.getPlayer().setBarrelAngle(newAng);
 			}
@@ -93,7 +94,7 @@ public class HUD extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(label);
 		panel.add(angle);
-		panel.add(submit);
+		panel.add(setAngleButton);
 		panel.add(shoot);
 		return panel;
 	}
