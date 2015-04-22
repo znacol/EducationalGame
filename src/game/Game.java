@@ -56,8 +56,8 @@ public class Game extends JFrame {
 		Random rand = new Random();
 		boolean contains = false;
 		for(int i = 0; i < NUM_TARGETS; i++) {
-			int x = rand.nextInt(WIDTH - HUD_WIDTH) + 1;
-			int y = rand.nextInt(HEIGHT) + 1;
+			int x = rand.nextInt(WIDTH - HUD_WIDTH - TAR_MAX) + 1;
+			int y = rand.nextInt(HEIGHT - 200) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;
 			RectangleTarget tar = new RectangleTarget(x, y, width, height);

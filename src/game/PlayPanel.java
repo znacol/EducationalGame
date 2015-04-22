@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 // This class is intended to draw the Player and Targets on screen
 // We decided this would keep Game.java more managable
@@ -16,6 +17,7 @@ public class PlayPanel extends JPanel {
 	public PlayPanel(ArrayList<Target> targets, Player player) {
 		this.player = player;
 		this.targets = targets;
+		setBorder(new EtchedBorder());
 	}
 	
 	public void updateTargets() {}
