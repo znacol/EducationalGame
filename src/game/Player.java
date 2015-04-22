@@ -30,10 +30,10 @@ public class Player {
 	// Use trig to calculate the end point for the line of the barrel based on angle and length
 	public Point calcBarrelEnd() {
 		Point e = new Point();
-		double y = Math.sin(Math.toRadians(barrelAngle)) * barrelLength;
+		double y = Math.sin(-Math.toRadians(barrelAngle)) * barrelLength;
 		y += barrelStart.getY();
 		double x = Math.cos(Math.toRadians(barrelAngle)) * barrelLength;
-		x = barrelStart.getX();
+		x += barrelStart.getX();
 		double pythag = Math.sqrt(Math.pow(Math.abs(barrelStart.getX() - x), 2) + Math.pow(Math.abs(barrelStart.getY() - y), 2));
 		if(Math.abs(barrelLength - pythag) >= 0.00001) {
 			System.out.println(pythag + " = x^2 + y^2 does not equal the barrelLength when calculating new endpoints...");
