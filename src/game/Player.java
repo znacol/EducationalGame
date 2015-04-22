@@ -32,8 +32,8 @@ public class Player {
 		y += barrelStart.getY();
 		double x = Math.cos(barrelAngle) * barrelLength;
 		x += barrelStart.getX();
-		double pythag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-		if(pythag != barrelLength) {
+		double pythag = Math.sqrt(Math.pow(Math.abs(barrelStart.getX() - x), 2) + Math.pow(Math.abs(barrelStart.getY() - y), 2));
+		if(Math.abs(barrelLength - pythag) >= 0.00001) {
 			System.out.println(pythag + " = x^2 + y^2 does not equal the barrelLength when calculating new endpoints...");
 		}
 		e.setLocation(x, y);	// allows setting Point x/y as double
