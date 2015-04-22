@@ -11,10 +11,12 @@ public class Player {
 	private int x, y;	// the initial point for drawRect() for the "base" of the Player/tank
 	private int barrelLength = 50;
 	private Point barrelStart, barrelEnd;
+	private Game game;
 	
-	public Player(int x, int y) {
+	public Player(int x, int y, Game game) {
 		this.x = x;
 		this.y = y;
+		this.game = game;
 		init();
 	}
 	
@@ -50,6 +52,7 @@ public class Player {
 	public void setBarrelAngle(int barrelAngle) {
 		this.barrelAngle = barrelAngle;
 		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
+		game.repaintGame();
 	}
 
 	// Should return the calculated angle from the points forming the graphic barrel! ?

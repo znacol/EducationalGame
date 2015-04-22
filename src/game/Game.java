@@ -31,7 +31,7 @@ public class Game extends JFrame {
 
 	public Game() {
 		targets = new ArrayList<Target>();
-		player = new Player(250,600);
+		player = new Player(250,600, this);
 		spawnTargets();
 		initGUI();
 	}
@@ -75,6 +75,9 @@ public class Game extends JFrame {
 		}
 	}
 	
+	public void repaintGame(){
+		repaint();
+	}
 	public ArrayList<Target> getTargets(){return targets;}
 
 	public Player getPlayer() {return player;}
