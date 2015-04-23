@@ -6,7 +6,7 @@ import java.awt.Point;
 
 public class Player {
 	private int score;
-	private int barrelAngle;
+	private double barrelAngle;
 	private static int baseDimension = 50;
 	private int x, y;	// the initial point for drawRect() for the "base" of the Player/tank
 	private int barrelLength = 50;
@@ -32,10 +32,6 @@ public class Player {
 		y += barrelStart.getY();
 		double x = Math.cos(Math.toRadians(barrelAngle)) * barrelLength;
 		x += barrelStart.getX();
-		double pythag = Math.sqrt(Math.pow(Math.abs(barrelStart.getX() - x), 2) + Math.pow(Math.abs(barrelStart.getY() - y), 2));
-		if(Math.abs(barrelLength - pythag) >= 0.00001) {
-			System.out.println(pythag + " = x^2 + y^2 does not equal the barrelLength when calculating new endpoints...");
-		}
 		e.setLocation(x, y);	// allows setting Point x/y as double
 		return e;
 	}
@@ -53,15 +49,16 @@ public class Player {
 	}
 
 	// Should return the calculated angle from the points forming the graphic barrel! ?
-	public int checkAngle() {
-		double dx = Math.abs(barrelStart.getX() - barrelEnd.getX());
-		double dy = Math.abs(barrelStart.getY() - barrelEnd.getY());
+	public double checkAngle() {
+		double dx = (barrelEnd.getX() - barrelStart.getX());
+		// double dy = (barrelEnd.getY() - barrelStart.getY());
 		double cosCalc = Math.toDegrees(Math.acos(dx / barrelLength));
-		double sinCalc = Math.toDegrees(Math.asin(dy / barrelLength));
-		System.out.println("dx: " + dx + ", dy: " + dy);
-		System.out.println("arccos(x/barrelLength): " + cosCalc + ", arcsin(y/barrelLength): " + sinCalc);
-		double avg = (cosCalc + sinCalc) / 2;
-		return (int) avg;
+		// double sinCalc = Math.toDegrees(Math.asin(dy / barrelLength));
+		// double avg = (Math.abs(cosCalc) + Math.abs(sinCalc)) / 2;
+		// avg = Math.round(avg); probably wouldn't want to round to compare to a double either
+		// returning cosCalc and not the average of arcsin and arccos calculations
+		// did not want to deal with arcsin and the difference in 1st and 2nd quandrants
+		return cosCalc;
 	}
 	
 	public void setScore(int score){
@@ -81,5 +78,5 @@ public class Player {
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 	}
 	
-	public int getAngle() { return barrelAngle; }
+	public double getAngle() { return barrelAngle; }
 }

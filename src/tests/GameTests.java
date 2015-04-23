@@ -56,24 +56,24 @@ public class GameTests {
 	public void correctBarrelAngle() {
 		Player p = new Player();
 		p.setBarrelAngle(0);
-		int angle = p.checkAngle();
-		assertEquals(angle, 0);
+		double angle = p.checkAngle();
+		assertEquals(angle, 0, 0.75);
 		
 		p.setBarrelAngle(30);
 		angle = p.checkAngle();
-		assertEquals(angle, 30);
+		assertEquals(angle, 30, 0.75);
 		
 		p.setBarrelAngle(60);
 		angle = p.checkAngle();
-		assertEquals(angle, 60);
+		assertEquals(angle, 60, 0.75);
 		
 		p.setBarrelAngle(120);
 		angle = p.checkAngle();
-		assertEquals(angle, 120);
+		assertEquals(angle, 120, 0.75);
 		
 		p.setBarrelAngle(23);
 		angle = p.checkAngle();
-		assertEquals(angle, 23);
+		assertEquals(angle, 23, 0.75);
 	}
 	
 	@Test // that no targets overlap
