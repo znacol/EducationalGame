@@ -78,8 +78,14 @@ public class Game extends JFrame {
 	public void repaintGame(){
 		repaint();
 	}
-	public ArrayList<Target> getTargets(){return targets;}
+	public ArrayList<Target> getTargets() { return targets; }
 
 	public Player getPlayer() {return player;}
 
+	public void playerShoots() {
+		player.shoot();
+		for(int i = 0; i < targets.size(); i++) {
+			
+		}
+	}
 }

@@ -43,7 +43,7 @@ public class Player {
 	}
 
 	// take in the new barrelAngle, set the instance's and then recalculate the endpoint for the barrel's line
-	public void setBarrelAngle(int barrelAngle) {
+	public void setBarrelAngle(double barrelAngle) {
 		this.barrelAngle = barrelAngle;
 		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
 	}
@@ -79,4 +79,9 @@ public class Player {
 	}
 	
 	public double getAngle() { return barrelAngle; }
+
+	public void shoot() {
+		// TODO Auto-generated method stub
+		
+	}
 }

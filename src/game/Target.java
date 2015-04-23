@@ -8,6 +8,7 @@ import java.util.Random;
 public abstract class Target {
 	
 	protected Color color;
+	protected double minHittableAngle, maxHittableAngle;
 	
 	public Target() {
 		color = randomColor();
@@ -24,4 +25,16 @@ public abstract class Target {
 	public abstract boolean contains(Target t);
 	
 	public abstract void draw(Graphics g);
+	
+	public boolean isHit(double barrelAngle) {
+		return minHittableAngle <= barrelAngle && barrelAngle <= maxHittableAngle;
+	}
+	
+	public abstract void calcMinHitAngle();
+	
+	public abstract void calcMaxHitAngle();
+	
+	public double getMinHitAngle() { return minHittableAngle; }
+	
+	public double getMaxHitAngle() { return maxHittableAngle; }
 }

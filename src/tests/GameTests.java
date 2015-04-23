@@ -8,17 +8,44 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GameTests {
 
-	private Game game; 
+	private static Game game; 
 	
-	@Before	// initialize a Game with a list of targets
-	public void setUp() {
+	@BeforeClass	// initialize a Game with a list of targets
+	public static void setUp() {
 		game = new Game();
 	}
 
+	
+	@Test // when we expect the shot to hit the target, it is hit and destroyed
+	public void hitDestroys() {
+		// get the angle at which a target from the list should be destroyed at
+		ArrayList<Target> tars = game.getTargets();
+		Player p = game.getPlayer();
+		for(int i = 0; i < tars.size(); i++) {
+			Target t = tars.get(i);
+			double min = t.getMinHitAngle();
+			double max = t.getMaxHitAngle();
+			double theta = (min + max) / 2;
+			p.setBarrelAngle(theta);
+			game.playerShoots();
+			assertNull(t);
+			// may need to change type of assertion
+		}
+	}
+	
+	@Test // when we miss, we actually miss
+	public void missedShot() {
+		// get the angles at which all targets from the list should be destroyed at
+		// set the barrel angle to anything but these
+		// shoot
+		// make sure no target was hit
+		// do this a lot more than once!
+	}
 	
 	/*
 	 * Ideas for later tests:

@@ -49,4 +49,16 @@ public class RectangleTarget extends Target {
 	public int getY() {return y;}
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
+
+	@Override
+	public void calcMinHitAngle() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void calcMaxHitAngle() {
+		// TODO Auto-generated method stub
+		
+	}
 }
