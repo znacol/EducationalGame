@@ -32,7 +32,6 @@ public class GameTests {
 			double min = t.getMinHitAngle();
 			double max = t.getMaxHitAngle();
 			double theta = (min + max) / 2;
-			System.out.println(theta);
 			p.setBarrelAngle(theta);
 			game.playerShoots();
 			tars = game.getTargets();

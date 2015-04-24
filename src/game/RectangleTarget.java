@@ -12,12 +12,28 @@ public class RectangleTarget extends Target {
 	private int width;
 	private int height;
 	
+	// This constructor shouldn't be used other than backward compatibility for testing
 	public RectangleTarget(int x, int y, int width, int height) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		calcHitRange(new Point(0,0));
+	}
+	
+	public RectangleTarget(int x, int y, int width, int height, Point playerCoord) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		calcHitRange(playerCoord);
+	}
+
+	private void calcHitRange(Point playerCoord) {
+		calcMinHitAngle(playerCoord);
+		calcMaxHitAngle(playerCoord);
 	}
 
 	@Override
@@ -51,12 +67,22 @@ public class RectangleTarget extends Target {
 	public int getHeight() {return height;}
 
 	@Override
-	public void calcMinHitAngle() {
-		
+	public void calcMinHitAngle(Point barrelBase) {
+		double baseX = barrelBase.getX();
+		double baseY = barrelBase.getY();
+		double dx = Math.abs(baseX - (x + width));
+		double dy = Math.abs(baseY - (y + height));
+		double angle = Math.toDegrees(Math.atan(dy / dx));
+		maxHittableAngle = Math.abs(angle);
 	}
 
 	@Override
-	public void calcMaxHitAngle() {
-	
+	public void calcMaxHitAngle(Point barrelBase) {
+		double baseX = barrelBase.getX();
+		double baseY = barrelBase.getY();
+		double dx = baseX - x;
+		double dy = baseY - y;
+		double angle = Math.toDegrees(Math.atan(dy / dx));
+		maxHittableAngle = Math.abs(angle);
 	}
 }

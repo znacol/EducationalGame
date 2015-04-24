@@ -30,9 +30,9 @@ public abstract class Target {
 		return minHittableAngle <= barrelAngle && barrelAngle <= maxHittableAngle;
 	}
 	
-	public abstract void calcMinHitAngle();
+	public abstract void calcMinHitAngle(Point barrelBase);
 	
-	public abstract void calcMaxHitAngle();
+	public abstract void calcMaxHitAngle(Point barrelBase);
 	
 	public double getMinHitAngle() { return minHittableAngle; }
 	

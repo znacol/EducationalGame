@@ -59,7 +59,7 @@ public class Game extends JFrame {
 			int y = rand.nextInt(HEIGHT - 200) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;
-			RectangleTarget tar = new RectangleTarget(x, y, width, height);
+			RectangleTarget tar = new RectangleTarget(x, y, width, height, player.getBasePoint());
 			// Loops through all targets and makes sure none contain new random tar
 			for(Target j : targets) {
 				if(j.contains(tar)) {

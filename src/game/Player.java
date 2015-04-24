@@ -48,6 +48,10 @@ public class Player {
 		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
 	}
 
+	public Point getBasePoint() {
+		return barrelStart;
+	}
+	
 	// Should return the calculated angle from the points forming the graphic barrel! ?
 	public double checkAngle() {
 		double dx = (barrelEnd.getX() - barrelStart.getX());
