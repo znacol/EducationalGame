@@ -6,6 +6,7 @@ import game.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,20 +32,36 @@ public class GameTests {
 			double min = t.getMinHitAngle();
 			double max = t.getMaxHitAngle();
 			double theta = (min + max) / 2;
+			System.out.println(theta);
 			p.setBarrelAngle(theta);
 			game.playerShoots();
-			assertNull(t);
-			// may need to change type of assertion
+			tars = game.getTargets();
+			for(Target living : tars) {
+				assertNotEquals(t, living);
+			}
 		}
 	}
 	
 	@Test // when we miss, we actually miss
 	public void missedShot() {
 		// get the angles at which all targets from the list should be destroyed at
+		ArrayList<Target> tars = game.getTargets();
+		double[][] hitRanges = new double[tars.size()][2];
+		for(int i = 0; i < tars.size(); i++) {
+			Target t = tars.get(i);
+			double minHit = t.getMinHitAngle();
+			double maxHit = t.getMaxHitAngle();
+			hitRanges[i][0] = minHit;
+			hitRanges[i][1] = maxHit;
+		}
+		Player p = game.getPlayer();
+		Random rand = new Random();
 		// set the barrel angle to anything but these
-		// shoot
-		// make sure no target was hit
-		// do this a lot more than once!
+		for(int i = 0; i < 100; i++) {
+			// test 100 missed shots: make sure no target was hit
+			// HOW DO WE IMPLEMENT THIS? Is it better to test visually?
+		}
+		fail("Not Yet Testing Anything Useful");
 	}
 	
 	/*

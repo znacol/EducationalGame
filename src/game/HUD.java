@@ -84,11 +84,7 @@ public class HUD extends JPanel {
 		shoot.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * 
-				 * MAKE THE PLAYER SHOOT!
-				 * 
-				 */
+				game.playerShoots();
 			}
 		});
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

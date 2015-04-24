@@ -54,13 +54,12 @@ public class Game extends JFrame {
 	public void spawnTargets() {
 		Random rand = new Random();
 		boolean contains = false;
-		for(int i = 0; i < NUM_TARGETS; i++) {
+		for(int i = targets.size(); i < NUM_TARGETS; i++) {	// initially 0, but will respawn missing ones otherwise
 			int x = rand.nextInt(WIDTH - HUD_WIDTH - TAR_MAX) + 1;
 			int y = rand.nextInt(HEIGHT - 200) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;
 			RectangleTarget tar = new RectangleTarget(x, y, width, height);
-			
 			// Loops through all targets and makes sure none contain new random tar
 			for(Target j : targets) {
 				if(j.contains(tar)) {
@@ -84,8 +83,16 @@ public class Game extends JFrame {
 
 	public void playerShoots() {
 		player.shoot();
+		double angle = player.getAngle();
 		for(int i = 0; i < targets.size(); i++) {
-			
+			Target t = targets.get(i);
+			if(t.isHit(angle)) {
+				targets.remove(i);
+				t = null;	// how do we destroy the target?
+				i = i - 1;	// go back one so you don't skip an element
+			}
 		}
+		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
+		repaint();
 	}
 }

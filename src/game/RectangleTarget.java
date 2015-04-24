@@ -52,13 +52,11 @@ public class RectangleTarget extends Target {
 
 	@Override
 	public void calcMinHitAngle() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void calcMaxHitAngle() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 }
