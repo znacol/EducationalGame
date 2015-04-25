@@ -49,7 +49,7 @@ public class Game extends JFrame {
 
 		playPanel = new PlayPanel(targets, player);
 		add(playPanel, BorderLayout.CENTER);
-
+		getContentPane().setBackground(Color.black);
 		setVisible(true);
 	} 
 

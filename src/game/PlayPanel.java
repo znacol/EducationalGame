@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class PlayPanel extends JPanel {
 		this.player = player;
 		this.targets = targets;
 		setBorder(new EtchedBorder());
+		setBackground(Color.BLACK);
 	}
 	
 	public void updateTargets() {}
