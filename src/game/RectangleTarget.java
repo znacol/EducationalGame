@@ -82,22 +82,39 @@ public class RectangleTarget extends Target {
 
 	@Override
 	public void calcMinHitAngle(Point barrelBase) {
+		boolean setPast = false;
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
-		double dx = Math.abs(baseX - (x + width));
-		double dy = Math.abs(baseY - (y + height));
+		double dx = baseX - (x + width);
+		if(dx > 0){
+			setPast = true;
+		}else dx = Math.abs(dx);
+		double dy = baseY - (y + height);
 		double angle = Math.toDegrees(Math.atan(dy / dx));
+		if (setPast == true){
+			double temp = 90 - angle;
+			angle += temp*2;
+		}
 		minHittableAngle = Math.abs(angle);
 		
 	}
 
 	@Override
 	public void calcMaxHitAngle(Point barrelBase) {
+		boolean setPast = false;
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
 		double dx = baseX - x;
+		if(dx > 0){
+			setPast = true;
+		}
+		else dx = Math.abs(dx);
 		double dy = baseY - y;
 		double angle = Math.toDegrees(Math.atan(dy / dx));
+		if (setPast == true){
+			double temp = 90 - angle;
+			angle += temp*2;
+		}
 		maxHittableAngle = Math.abs(angle);
 		
 	}

@@ -1,8 +1,9 @@
 package game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,12 +20,12 @@ public class Game extends JFrame {
 	private final int WIDTH = 700;
 	private final int HEIGHT = 700;
 	private final int HUD_WIDTH = 150;
-	
+
 	private JPanel hud, playPanel;
 
 	Player player;
 	ArrayList<Target> targets;
-	
+
 	public static void main(String[] args){
 		new Game();
 	}
@@ -35,7 +36,7 @@ public class Game extends JFrame {
 		spawnTargets();
 		initGUI();
 	}
-	
+
 	public void initGUI(){ 
 		setTitle("Geometry Game!");
 		setSize(WIDTH, HEIGHT);
@@ -44,10 +45,10 @@ public class Game extends JFrame {
 		hud = new HUD(this);
 		hud.setPreferredSize(new Dimension(HUD_WIDTH ,0));
 		add(hud, BorderLayout.WEST);
-		
+
 		playPanel = new PlayPanel(targets, player);
 		add(playPanel, BorderLayout.CENTER);
-		
+
 		setVisible(true);
 	} 
 
@@ -73,7 +74,7 @@ public class Game extends JFrame {
 			contains = false;
 		}
 	}
-	
+
 	public void repaintGame(){
 		repaint();
 	}
@@ -96,5 +97,23 @@ public class Game extends JFrame {
 		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		repaint();
+	}
+	public void drawLazzorz(Graphics g){
+
+		int endY = (int) Math.sin(-Math.toRadians(player.getAngle() * 500));
+		//y += barrelStart.getY();
+		int endX = (int) Math.cos(Math.toRadians(player.getAngle() * 500));
+		//x += barrelStart.getX();
+
+
+		g.setColor(Color.RED);
+
+		int x1 = (int) player.getBasePoint().x;
+		int y1 = (int) player.getBasePoint().y;
+		//int x2 = (int) barrelEnd.getX();
+		//int y2 = (int) barrelEnd.getY();
+		g.drawLine(x1, y1, endX, endY);			// draw the line for the Barrel
+
+
 	}
 }
