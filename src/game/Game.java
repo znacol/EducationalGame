@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 public class Game extends JFrame {
 	private int NUM_TARGETS = 10;
 	// Max and min sizes for targets
-	private final int TAR_MAX = 20;
-	private final int TAR_MIN = 8;
+	private final int TAR_MAX = 40;
+	private final int TAR_MIN = 20;
 
 	// Window dimensions
 	private final int WIDTH = 700;
@@ -25,6 +25,7 @@ public class Game extends JFrame {
 
 	Player player;
 	ArrayList<Target> targets;
+	
 
 	public static void main(String[] args){
 		new Game();
@@ -97,23 +98,7 @@ public class Game extends JFrame {
 		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		repaint();
+		
 	}
-	public void drawLazzorz(Graphics g){
 
-		int endY = (int) Math.sin(-Math.toRadians(player.getAngle() * 500));
-		//y += barrelStart.getY();
-		int endX = (int) Math.cos(Math.toRadians(player.getAngle() * 500));
-		//x += barrelStart.getX();
-
-
-		g.setColor(Color.RED);
-
-		int x1 = (int) player.getBasePoint().x;
-		int y1 = (int) player.getBasePoint().y;
-		//int x2 = (int) barrelEnd.getX();
-		//int y2 = (int) barrelEnd.getY();
-		g.drawLine(x1, y1, endX, endY);			// draw the line for the Barrel
-
-
-	}
 }

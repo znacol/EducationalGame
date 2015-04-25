@@ -9,7 +9,7 @@ public class Player {
 	private double barrelAngle;
 	private static int baseDimension = 50;
 	private int x, y;	// the initial point for drawRect() for the "base" of the Player/tank
-	private int barrelLength = 50;
+	private int barrelLength = 800;
 	private Point barrelStart, barrelEnd;
 	
 	public Player(int x, int y) {

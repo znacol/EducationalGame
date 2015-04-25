@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 public class RectangleTarget extends Target {
@@ -32,16 +34,17 @@ public class RectangleTarget extends Target {
 	}
 
 	private void calcHitRange(Point playerCoord) {
-		calcMinHitAngle(playerCoord);
+		//calcMinHitAngle(playerCoord);
 		
-		calcMaxHitAngle(playerCoord);
-		adjustForArea();
+		//calcMaxHitAngle(playerCoord);
+		calcMaxMin(playerCoord);
+		//adjustForArea(); do not need at the moment = PENDING DELETE
 		System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
 		
 		
 	}
 
-	private void adjustForArea() {
+	/*private void adjustForArea() {
 		if (minHittableAngle > maxHittableAngle){
 			double temp = maxHittableAngle;
 			maxHittableAngle = minHittableAngle;
@@ -49,7 +52,7 @@ public class RectangleTarget extends Target {
 		}
 		
 	}
-
+*/
 	@Override
 	public boolean contains(Point p) {
 		Rectangle rect = new Rectangle(x, y, width, height);
@@ -117,5 +120,44 @@ public class RectangleTarget extends Target {
 		}
 		maxHittableAngle = Math.abs(angle);
 		
+	}
+	
+	public void calcMaxMin(Point barrelBase){
+		double baseX = barrelBase.getX();
+		double baseY = barrelBase.getY();
+		double temp[] = {0,0,0,0}; 
+		//case 1
+		double dx = baseX - x;
+		double dy = baseY - y;
+		temp[0] = calulations(dx, dy);
+		//case 2
+		dx = baseX - (x + width);
+		dy = baseY - y;
+		temp[1] = calulations(dx, dy);
+		//case 3
+		dx = baseX - x;
+		dy = baseY - (y + height);
+		temp[2] = calulations(dx, dy);
+		//case 4
+		dx = baseX - (x + width);
+		dy = baseY - (y + height);
+		temp[3] = calulations(dx, dy);
+		Arrays.sort(temp);
+		minHittableAngle = temp[0];
+		maxHittableAngle = temp[3];
+		
+	}
+	public double calulations(double dx, double dy){
+		boolean setPast = false;
+		if(dx > 0){
+			setPast = true;
+		}
+		else dx = Math.abs(dx);
+		double angle = Math.toDegrees(Math.atan(dy / dx));
+		if (setPast == true){
+			double temp = 90 - angle;
+			angle += temp*2;
+		}
+		return Math.abs(angle);
 	}
 }
