@@ -35,8 +35,18 @@ public class RectangleTarget extends Target {
 		calcMinHitAngle(playerCoord);
 		
 		calcMaxHitAngle(playerCoord);
+		adjustForArea();
 		System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
 		
+		
+	}
+
+	private void adjustForArea() {
+		if (minHittableAngle > maxHittableAngle){
+			double temp = maxHittableAngle;
+			maxHittableAngle = minHittableAngle;
+			minHittableAngle = temp;
+		}
 		
 	}
 
