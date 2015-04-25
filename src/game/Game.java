@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Game extends JFrame {
-	private final int NUM_TARGETS = 10;
+	private int NUM_TARGETS = 10;
 	// Max and min sizes for targets
 	private final int TAR_MAX = 20;
 	private final int TAR_MIN = 8;
@@ -90,8 +90,10 @@ public class Game extends JFrame {
 				targets.remove(i);
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
+				System.out.println("test");
 			}
 		}
+		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		repaint();
 	}

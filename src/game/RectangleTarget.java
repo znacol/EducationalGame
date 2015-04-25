@@ -33,7 +33,11 @@ public class RectangleTarget extends Target {
 
 	private void calcHitRange(Point playerCoord) {
 		calcMinHitAngle(playerCoord);
+		
 		calcMaxHitAngle(playerCoord);
+		System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
+		
+		
 	}
 
 	@Override
@@ -73,7 +77,8 @@ public class RectangleTarget extends Target {
 		double dx = Math.abs(baseX - (x + width));
 		double dy = Math.abs(baseY - (y + height));
 		double angle = Math.toDegrees(Math.atan(dy / dx));
-		maxHittableAngle = Math.abs(angle);
+		minHittableAngle = Math.abs(angle);
+		
 	}
 
 	@Override
@@ -84,5 +89,6 @@ public class RectangleTarget extends Target {
 		double dy = baseY - y;
 		double angle = Math.toDegrees(Math.atan(dy / dx));
 		maxHittableAngle = Math.abs(angle);
+		
 	}
 }
