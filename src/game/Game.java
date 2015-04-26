@@ -21,7 +21,8 @@ public class Game extends JFrame {
 	private final int HEIGHT = 700;
 	private final int HUD_WIDTH = 150;
 
-	private JPanel hud, playPanel;
+	private JPanel playPanel;
+	private HUD hud;
 
 	Player player;
 	ArrayList<Target> targets;
@@ -84,7 +85,7 @@ public class Game extends JFrame {
 			if(t.isHit(angle)) {
 				targets.remove(i);
 				player.addToScore(10);		// If hit, increment score.
-				System.out.println(player.getScore());		// Score functionality works but doesn't update panel properly.
+				hud.updateScore();
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
 			}
@@ -93,11 +94,9 @@ public class Game extends JFrame {
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		repaint();
 	}
-	
 	public void repaintGame(){
 		repaint();
 	}
-	
 	public ArrayList<Target> getTargets() { return targets; }
 	public Player getPlayer() {return player;}
 

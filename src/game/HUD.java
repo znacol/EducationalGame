@@ -19,7 +19,7 @@ public class HUD extends JPanel {
 	public final static int HEIGHT = 200;
 
 	private Game game;
-	private JPanel scorePanel, challengePanel, anglePanel;
+	private JPanel challengePanel, anglePanel;
 	private JLabel score;
 	private JTextField angle;
 	private JTextArea challenge;

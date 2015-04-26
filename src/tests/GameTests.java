@@ -8,7 +8,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,7 +20,6 @@ public class GameTests {
 		game = new Game();
 	}
 
-	
 	@Test // when we expect the shot to hit the target, it is hit and destroyed
 	public void hitDestroys() {
 		// get the angle at which a target from the list should be destroyed at
