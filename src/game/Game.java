@@ -23,9 +23,11 @@ public class Game extends JFrame {
 
 	private JPanel playPanel;
 	private HUD hud;
-
-	Player player;
-	ArrayList<Target> targets;
+	
+	private Challenge challenge;
+	private Player player;
+	private ArrayList<Target> targets;
+	private boolean isChallenge;
 	
 
 	public static void main(String[] args){
@@ -35,6 +37,8 @@ public class Game extends JFrame {
 	public Game() {
 		targets = new ArrayList<Target>();
 		player = new Player(250,600);
+		challenge = new Challenge();
+		isChallenge = false;
 		spawnTargets();
 		initGUI();
 	}
@@ -84,20 +88,28 @@ public class Game extends JFrame {
 			Target t = targets.get(i);
 			if(t.isHit(angle)) {
 				targets.remove(i);
-				player.addToScore(10);		// If hit, increment score.
-				hud.updateScore();
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
+				
+				// If isChallenge turn and player does correctly, increment score.
+				if(isChallenge && challenge.checkChallenge(player))
+					player.addToScore(10);
+				player.addToScore(10);		// If hit, increment score.
+				hud.updateScore();
 			}
 		}
 		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
+		
+		String chal = challenge.isChallengeTurn(targets.size()); 
+		if(chal != "") {
+			hud.updateChallenge(chal);
+			isChallenge = true;
+		}
 		repaint();
 	}
-	public void repaintGame(){
-		repaint();
-	}
+	public void repaintGame() { repaint(); }
 	public ArrayList<Target> getTargets() { return targets; }
-	public Player getPlayer() {return player;}
+	public Player getPlayer() { return player; }
 
 }

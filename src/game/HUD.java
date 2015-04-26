@@ -51,9 +51,14 @@ public class HUD extends JPanel {
 		challenge.setLineWrap(true);
 		challenge.setEditable(false);
 		challenge.setPreferredSize(new Dimension(500,250));
-		challenge.setFont(new Font("SansSerif", Font.BOLD, 20));		
+		challenge.setFont(new Font("SansSerif", Font.BOLD, 12));		
 		panel.add(challenge);
 		return panel;
+	}
+	
+	public void updateChallenge(String challengePrompt) {
+		challenge.setText(challengePrompt);
+		System.out.println(challengePrompt);
 	}
 
 	public JPanel anglePanel() {
