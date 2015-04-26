@@ -45,7 +45,8 @@ public class GameTests {
 	public void missedShot() {
 		// get the angles at which all targets from the list should be destroyed at
 		ArrayList<Target> tars = game.getTargets();
-		double[][] hitRanges = new double[tars.size()][2];
+		int initTarsSize = tars.size();
+		double[][] hitRanges = new double[initTarsSize][2];
 		for(int i = 0; i < tars.size(); i++) {
 			Target t = tars.get(i);
 			double minHit = t.getMinHitAngle();
@@ -55,12 +56,21 @@ public class GameTests {
 		}
 		Player p = game.getPlayer();
 		Random rand = new Random();
+		boolean check = false;
 		// set the barrel angle to anything but these
 		for(int i = 0; i < 100; i++) {
-			// test 100 missed shots: make sure no target was hit
-			// HOW DO WE IMPLEMENT THIS? Is it better to test visually?
+			int testAngle = rand.nextInt(360);
+			for(int j = 0; j < initTarsSize; j++) {
+				// Check if random angle is between min and max hittabel angles for every target.
+				if(hitRanges[j][0] <= testAngle && testAngle <= hitRanges[j][1]) {
+					check = true;
+					break;
+				}
+			}
+			if(!check)
+				assertEquals(tars.size(), initTarsSize);		// Size of targets array should stay the same if always missing.
+			check = false;
 		}
-		fail("Not Yet Testing Anything Useful");
 	}
 	
 	/*
@@ -132,22 +142,4 @@ public class GameTests {
 			}
 		}
 	}
-	
-	/*
-	 * 		Decide that these are probably unnecessary tests
-	 * 
-	
-	@Test // that targets spawn in desired panel/area 
-	public void targetsOnScreen() {
-		fail("Not yet implemented");
-	}
-	
-	@Test	// that targets do not spawn on tank/HUD
-	public void noTargetsOnOtherComponents() {
-		fail("Not yet implemented");
-	} 
-	
-	*
-	*
-	*/
 }

@@ -13,7 +13,7 @@ public class RectangleTarget extends Target {
 	private int y;
 	private int width;
 	private int height;
-	
+
 	// This constructor shouldn't be used other than backward compatibility for testing
 	public RectangleTarget(int x, int y, int width, int height) {
 		super();
@@ -23,7 +23,7 @@ public class RectangleTarget extends Target {
 		this.height = height;
 		calcHitRange(new Point(0,0));
 	}
-	
+
 	public RectangleTarget(int x, int y, int width, int height, Point playerCoord) {
 		super();
 		this.x = x;
@@ -34,14 +34,12 @@ public class RectangleTarget extends Target {
 	}
 
 	private void calcHitRange(Point playerCoord) {
-		//calcMinHitAngle(playerCoord);
-		
-		//calcMaxHitAngle(playerCoord);
 		calcMaxMin(playerCoord);
+
+		//calcMinHitAngle(playerCoord);
+		//calcMaxHitAngle(playerCoord);
 		//adjustForArea(); do not need at the moment = PENDING DELETE
-		System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
-		
-		
+		//System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
 	}
 
 	/*private void adjustForArea() {
@@ -50,39 +48,7 @@ public class RectangleTarget extends Target {
 			maxHittableAngle = minHittableAngle;
 			minHittableAngle = temp;
 		}
-		
 	}
-*/
-	@Override
-	public boolean contains(Point p) {
-		Rectangle rect = new Rectangle(x, y, width, height);
-		if(rect.contains(p))
-			return true;
-		return false;
-	}
-
-	@Override
-	public boolean contains(Target t) {
-		//Right now only checks if RectangleTarget contains other RectangleTarget- need to change if implementing other shapes
-		Rectangle rect = new Rectangle(x, y, width, height);
-		RectangleTarget other = (RectangleTarget)(t);
-		Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);
-		if(rect.intersects(otherRect))
-			return true;
-		return false;
-	}
-	
-	// Should randomize color of target.
-	public void draw(Graphics g) {
-		g.setColor(color);
-		g.fillRect(x, y, width, height);
-	}
-	
-	public int getX() {return x;}
-	public int getY() {return y;}
-	public int getWidth() {return width;}
-	public int getHeight() {return height;}
-
 	@Override
 	public void calcMinHitAngle(Point barrelBase) {
 		boolean setPast = false;
@@ -99,7 +65,6 @@ public class RectangleTarget extends Target {
 			angle += temp*2;
 		}
 		minHittableAngle = Math.abs(angle);
-		
 	}
 
 	@Override
@@ -119,9 +84,7 @@ public class RectangleTarget extends Target {
 			angle += temp*2;
 		}
 		maxHittableAngle = Math.abs(angle);
-		
-	}
-	
+	}*/
 	public void calcMaxMin(Point barrelBase){
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
@@ -129,25 +92,25 @@ public class RectangleTarget extends Target {
 		//case 1
 		double dx = baseX - x;
 		double dy = baseY - y;
-		temp[0] = calulations(dx, dy);
+		temp[0] = calculations(dx, dy);
 		//case 2
 		dx = baseX - (x + width);
 		dy = baseY - y;
-		temp[1] = calulations(dx, dy);
+		temp[1] = calculations(dx, dy);
 		//case 3
 		dx = baseX - x;
 		dy = baseY - (y + height);
-		temp[2] = calulations(dx, dy);
+		temp[2] = calculations(dx, dy);
 		//case 4
 		dx = baseX - (x + width);
 		dy = baseY - (y + height);
-		temp[3] = calulations(dx, dy);
+		temp[3] = calculations(dx, dy);
 		Arrays.sort(temp);
 		minHittableAngle = temp[0];
 		maxHittableAngle = temp[3];
-		
+
 	}
-	public double calulations(double dx, double dy){
+	public double calculations(double dx, double dy){
 		boolean setPast = false;
 		if(dx > 0){
 			setPast = true;
@@ -160,4 +123,34 @@ public class RectangleTarget extends Target {
 		}
 		return Math.abs(angle);
 	}
+	@Override
+	public boolean contains(Point p) {
+		Rectangle rect = new Rectangle(x, y, width, height);
+		if(rect.contains(p))
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean contains(Target t) {
+		Rectangle rect = new Rectangle(x, y, width, height);
+		RectangleTarget other = (RectangleTarget)(t);
+		Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);
+		if(rect.intersects(otherRect))
+			return true;
+		return false;
+	}
+
+	// Should randomize color of target.
+	public void draw(Graphics g) {
+		g.setColor(color);
+		g.fillRect(x, y, width, height);
+	}
+
+	public int getX() {return x;}
+	public int getY() {return y;}
+	public int getWidth() {return width;}
+	public int getHeight() {return height;}
+
+
 }

@@ -76,13 +76,6 @@ public class Game extends JFrame {
 		}
 	}
 
-	public void repaintGame(){
-		repaint();
-	}
-	public ArrayList<Target> getTargets() { return targets; }
-
-	public Player getPlayer() {return player;}
-
 	public void playerShoots() {
 		player.shoot();
 		double angle = player.getAngle();
@@ -90,15 +83,22 @@ public class Game extends JFrame {
 			Target t = targets.get(i);
 			if(t.isHit(angle)) {
 				targets.remove(i);
+				player.addToScore(10);		// If hit, increment score.
+				System.out.println(player.getScore());		// Score functionality works but doesn't update panel properly.
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
-				System.out.println("test");
 			}
 		}
 		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		repaint();
-		
 	}
+	
+	public void repaintGame(){
+		repaint();
+	}
+	
+	public ArrayList<Target> getTargets() { return targets; }
+	public Player getPlayer() {return player;}
 
 }
