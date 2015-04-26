@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -50,7 +52,7 @@ public class HUD extends JPanel {
 		challenge = new JTextArea();
 		challenge.setLineWrap(true);
 		challenge.setEditable(false);
-		challenge.setPreferredSize(new Dimension(500,250));
+		challenge.setPreferredSize(new Dimension(145,40));
 		challenge.setFont(new Font("SansSerif", Font.BOLD, 12));		
 		panel.add(challenge);
 		return panel;
@@ -79,8 +81,38 @@ public class HUD extends JPanel {
 					game.repaintGame();
 				}
 				game.getPlayer().setBarrelAngle(newAng);
+			} 
+			
+		});  
+		
+		angle.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) { 
 			}
-		});
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String input = angle.getText();
+					int newAng = 0;
+					if (input.length() > 0) {
+						newAng = Integer.parseInt(angle.getText());
+						game.repaintGame();
+					}
+					game.getPlayer().setBarrelAngle(newAng);
+				} 
+				else if(e.getKeyCode() == KeyEvent.VK_SPACE) 
+					game.playerShoots();
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) { 
+			}  
+			
+		}); 
+		
+		
 		JButton shoot = new JButton("Shoot!");
 		shoot.addActionListener(new ActionListener() {
 			@Override
