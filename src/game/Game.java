@@ -101,6 +101,10 @@ public class Game extends JFrame {
 
 	public void playerShoots() {
 		player.shoot();
+		repaint();
+		JOptionPane.showMessageDialog(null, "Laser Fired!");
+		player.doneShooting();
+		repaint();
 		double angle = player.getAngle();
 		boolean allMissed = true;
 		for(int i = 0; i < targets.size(); i++) {
@@ -145,7 +149,6 @@ public class Game extends JFrame {
 			hud.updateChallenge("");
 			isChallenge = false;	// turn challenge "off" after success/failure
 		}
-		repaint();
 	}
 	public ArrayList<Target> getTargets() { return targets; }
 	public Player getPlayer() { return player; }

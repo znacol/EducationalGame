@@ -11,6 +11,7 @@ public class Player {
 	private int x, y;	// the initial point for drawRect() for the "base" of the Player/tank
 	private int barrelLength = 75;
 	private Point barrelStart, barrelEnd;
+	private static Color barrelColor = Color.GREEN;
 
 	public Player(int x, int y) {
 		this.x = x;
@@ -60,7 +61,7 @@ public class Player {
 		int y2 = (int) barrelEnd.getY();
 		g.setColor(Color.cyan);
 		g.drawLine(x1, y1, x1 + 50, y1);	// draw a line with which the barrel will form the angle
-		g.setColor(Color.GREEN);
+		g.setColor(barrelColor);
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 		String theta = Integer.toString((int)Math.round(barrelAngle)) + "\u00b0";	// angle and degree symbol
 		g.drawString(theta, x1 - 10, y1 + 20);	// draw the string representation of the barrelAngle
@@ -69,6 +70,15 @@ public class Player {
 	public void shoot() {
 		// What does this need to do?? playerShoot() in Game.java does all that is needed to shoot.
 		// Maybe can draw trajectory line of "missile"?
+		barrelLength = 600;
+		barrelEnd = calcBarrelEnd();
+		barrelColor = Color.RED;
+	}
+	
+	public void doneShooting() {
+		barrelLength = 75;
+		barrelEnd = calcBarrelEnd();
+		barrelColor = Color.GREEN;
 	}
 
 	public void addToScore(int score){ this.score += score; }
