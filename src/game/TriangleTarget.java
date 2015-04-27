@@ -12,7 +12,7 @@ public class TriangleTarget extends Target {
 	private int height; 
 	private int[] xPts; 
 	private int[] yPts;
-
+	
 	public TriangleTarget(int x, int y, int width, int height, Point playerCoord) {
 		super();
 		this.width = width;
