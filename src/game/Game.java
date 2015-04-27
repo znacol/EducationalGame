@@ -68,7 +68,7 @@ public class Game extends JFrame {
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;   
 			Target tar = randomTarget(x,y,width,height,player.getBasePoint());
-			//Target tar = new TriangleTarget(x, y, width, height, player.getBasePoint());
+			//Target tar = new RectangleTarget(x, y, width, height, player.getBasePoint());
 			// Loops through all targets and makes sure none contain new random tar
 			for(Target j : targets) {
 				if(j.contains(tar)) {
@@ -85,14 +85,14 @@ public class Game extends JFrame {
 
 	private Target randomTarget(int x, int y, int width, int height, Point playerCoord) {
 		Random rand = new Random();  
-		switch(rand.nextInt() % numTypesofTargets) 
+		switch(rand.nextInt(numTypesofTargets)) 
 		{ 
 		case 0: 
 			return new RectangleTarget(x, y, width, height, player.getBasePoint()); 
 		case 1: 
 			return new TriangleTarget(x, y, width, height, player.getBasePoint());  
 		}  
-		
+		 
 		return randomTarget(x, y, width, height, player.getBasePoint());
 	}
 

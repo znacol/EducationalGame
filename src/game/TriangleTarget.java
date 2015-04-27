@@ -92,7 +92,7 @@ public class TriangleTarget extends Target {
 	}
 
 	public int getX() {return xPts[0];}
-	public int getY() {return yPts[1];} 
+	public int getY() {return yPts[0];} 
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
 
