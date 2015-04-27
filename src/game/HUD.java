@@ -52,6 +52,7 @@ public class HUD extends JPanel {
 		panel.add(new JLabel("Challenge Question: "));
 		challenge = new JTextArea();
 		challenge.setLineWrap(true);
+		challenge.setWrapStyleWord(true);
 		challenge.setEditable(false);
 		challenge.setPreferredSize(new Dimension(145,40));
 		challenge.setFont(new Font("SansSerif", Font.BOLD, 12));		

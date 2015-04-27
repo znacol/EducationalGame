@@ -33,7 +33,8 @@ public class Game extends JFrame {
 	
 	public static void main(String[] args){
 		String startMsg = "The angle of attack is formed by the cyan and green lines.\n" +
-				"Enter an angle and start shooting!\n"; // Probably tell user about keyboard shortcuts
+				"Enter an angle and start shooting!\n" + 
+				"\nShortcuts: UP/DOWN Arrows Change Angle. Spacebar Shoots."; // Probably tell user about keyboard shortcuts
 		JOptionPane.showMessageDialog(null, startMsg);
 		new Game();
 	}

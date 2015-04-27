@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -68,8 +69,10 @@ public class TriangleTarget extends Target {
 	}
 
 	public void draw(Graphics g) {
-			g.setColor(color); 
-			g.fillPolygon(xPts, yPts, 3); 	
+			g.setColor(color); 			
+			g.fillPolygon(xPts, yPts, 3);
+			g.setColor(Color.white);
+			g.drawPolygon(xPts, yPts, 3);
 	}
 
 	public int getX() {return xPts[0];}
