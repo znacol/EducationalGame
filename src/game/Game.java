@@ -102,9 +102,11 @@ public class Game extends JFrame {
 	public void playerShoots() {
 		player.shoot();
 		double angle = player.getAngle();
+		boolean allMissed = true;
 		for(int i = 0; i < targets.size(); i++) {
 			Target t = targets.get(i);
 			if(t.isHit(angle)) {
+				allMissed = false;
 				targets.remove(i);
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
@@ -124,7 +126,11 @@ public class Game extends JFrame {
 				player.addToScore(10);		// If hit, increment score.
 				hud.updateScore();
 			}
-				hud.getAnglePanel().requestFocusInWindow();
+			hud.getAnglePanel().requestFocusInWindow();
+		}
+		if(isChallenge && allMissed) {
+			player.addToScore(-20);
+			JOptionPane.showMessageDialog(null, "-10 Points, Challenge Missed!");
 		}
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		int oneInFour = new Random().nextInt(4);

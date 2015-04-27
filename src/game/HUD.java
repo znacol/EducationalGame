@@ -87,8 +87,7 @@ public class HUD extends JPanel {
 				}
 				game.getPlayer().setBarrelAngle(newAng);
 				getAnglePanel().requestFocus();
-			} 
-			
+			}
 		});  
 		
 		angle.addKeyListener(new KeyListener() {
@@ -102,7 +101,6 @@ public class HUD extends JPanel {
 					int newAng = 0;
 					if (input.length() > 0) {
 						newAng = Integer.parseInt(angle.getText().trim());
-						game.repaint();
 					}
 					p.setBarrelAngle(newAng);
 				} 
@@ -111,13 +109,13 @@ public class HUD extends JPanel {
 					angle.setText(angle.getText().trim());
 				}
 				else if(key == KeyEvent.VK_UP) {		// increase barrel angle
-					double theta = p.getAngle();
-					p.setBarrelAngle(theta + 1);
+					double theta = p.getAngle() + 1;
+					p.setBarrelAngle(theta);
 					angle.setText(Integer.toString((int)theta));
 				}
 				else if(key == KeyEvent.VK_DOWN) {		// decrease barrel angle
-					double theta = p.getAngle();
-					p.setBarrelAngle(theta - 1);
+					double theta = p.getAngle() - 1;
+					p.setBarrelAngle(theta);
 					angle.setText(Integer.toString((int)theta));
 				}
 				game.repaint();
