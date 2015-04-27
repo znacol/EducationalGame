@@ -63,16 +63,7 @@ public class Player {
 		g.setColor(Color.GREEN);
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 		String theta = Integer.toString((int)Math.round(barrelAngle)) + "\u00b0";	// angle and degree symbol
-		g.drawString(theta, x1 - 10, y1 + 20);
-		
-		/*g.setColor(Color.RED);
-		int x3 = (int) barrelEnd.x;
-		int y3 = (int) barrelEnd.y;
-		int x4 = (int) Math.cos(Math.toRadians(barrelAngle * barrelLength));
-		int y4 = (int) Math.sin(-Math.toRadians(barrelAngle * barrelLength));
-		x4 += x3;
-		y4 += y3;
-		g.drawLine(x3, y3, x4, y4);			// draw the trajectory line of missile*/
+		g.drawString(theta, x1 - 10, y1 + 20);	// draw the string representation of the barrelAngle
 	}
 
 	public void shoot() {
@@ -90,5 +81,4 @@ public class Player {
 		this.barrelAngle = barrelAngle;
 		barrelEnd = calcBarrelEnd();
 	}
-
 }

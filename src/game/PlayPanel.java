@@ -22,10 +22,6 @@ public class PlayPanel extends JPanel {
 		setBackground(Color.BLACK);
 	}
 	
-	public void updateTargets() {}
-	
-	public void updateAngle() {}
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		for(Target i : targets){
