@@ -34,59 +34,7 @@ public class RectangleTarget extends Target {
 		calcHitRange(playerCoord);
 	}
 
-	private void calcHitRange(Point playerCoord) {
-		calcMaxMin(playerCoord);
-
-		//calcMinHitAngle(playerCoord);
-		//calcMaxHitAngle(playerCoord);
-		//adjustForArea(); do not need at the moment = PENDING DELETE
-		//System.out.println("Min: " + minHittableAngle + " Max:" + maxHittableAngle);
-	}
-
-	/*private void adjustForArea() {
-		if (minHittableAngle > maxHittableAngle){
-			double temp = maxHittableAngle;
-			maxHittableAngle = minHittableAngle;
-			minHittableAngle = temp;
-		}
-	}
-	@Override
-	public void calcMinHitAngle(Point barrelBase) {
-		boolean setPast = false;
-		double baseX = barrelBase.getX();
-		double baseY = barrelBase.getY();
-		double dx = baseX - (x + width);
-		if(dx > 0){
-			setPast = true;
-		}else dx = Math.abs(dx);
-		double dy = baseY - (y + height);
-		double angle = Math.toDegrees(Math.atan(dy / dx));
-		if (setPast == true){
-			double temp = 90 - angle;
-			angle += temp*2;
-		}
-		minHittableAngle = Math.abs(angle);
-	}
-
-	@Override
-	public void calcMaxHitAngle(Point barrelBase) {
-		boolean setPast = false;
-		double baseX = barrelBase.getX();
-		double baseY = barrelBase.getY();
-		double dx = baseX - x;
-		if(dx > 0){
-			setPast = true;
-		}
-		else dx = Math.abs(dx);
-		double dy = baseY - y;
-		double angle = Math.toDegrees(Math.atan(dy / dx));
-		if (setPast == true){
-			double temp = 90 - angle;
-			angle += temp*2;
-		}
-		maxHittableAngle = Math.abs(angle);
-	}*/
-	public void calcMaxMin(Point barrelBase){
+	private void calcHitRange(Point barrelBase) {
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
 		double temp[] = {0,0,0,0}; 
@@ -109,8 +57,8 @@ public class RectangleTarget extends Target {
 		Arrays.sort(temp);
 		minHittableAngle = temp[0];
 		maxHittableAngle = temp[3];
-
 	}
+	
 	public double calculations(double dx, double dy){
 		boolean setPast = false;
 		if(dx > 0){
@@ -124,6 +72,7 @@ public class RectangleTarget extends Target {
 		}
 		return Math.abs(angle);
 	}
+
 	@Override
 	public boolean contains(Point p) {
 		Rectangle rect = new Rectangle(x, y, width, height);
@@ -132,17 +81,6 @@ public class RectangleTarget extends Target {
 		return false;
 	}
  
-	// Moved to parent class
-	/*@Override
-	public boolean contains(Target t) {
-		Rectangle rect = new Rectangle(x, y, width, height);
-		RectangleTarget other = (RectangleTarget)(t);
-		Rectangle otherRect = new Rectangle(other.x, other.y, other.width, other.height);
-		if(rect.intersects(otherRect))
-			return true;
-		return false;
-	}*/
-
 	// Should randomize color of target.
 	public void draw(Graphics g) {
 		g.setColor(color);
@@ -158,6 +96,4 @@ public class RectangleTarget extends Target {
 	public Shape getShape() {
 		return new Rectangle(x,y,width,height);
 	}
-
-
 }

@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 // This class is intended to draw the Player and Targets on screen
-// We decided this would keep Game.java more managable
+// We decided this would keep Game.java more manageable
 
 public class PlayPanel extends JPanel {
 	

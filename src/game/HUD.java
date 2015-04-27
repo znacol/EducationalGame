@@ -78,7 +78,7 @@ public class HUD extends JPanel {
 				int newAng = 0;
 				if(input.length() > 0) {
 					newAng = Integer.parseInt(angle.getText());
-					game.repaintGame();
+					game.repaint();
 				}
 				game.getPlayer().setBarrelAngle(newAng);
 			} 
@@ -86,30 +86,29 @@ public class HUD extends JPanel {
 		});  
 		
 		angle.addKeyListener(new KeyListener() {
-
+			// Should we make this KeyListener an actual class implemented by multiple JComponents so that it is more accessible?
 			@Override
 			public void keyPressed(KeyEvent e) { 
 				int key = e.getKeyCode();
+				Player p = game.getPlayer();
 				if (key == KeyEvent.VK_ENTER) {
 					String input = angle.getText();
 					int newAng = 0;
 					if (input.length() > 0) {
 						newAng = Integer.parseInt(angle.getText().trim());
-						game.repaintGame();
+						game.repaint();
 					}
-					game.getPlayer().setBarrelAngle(newAng);
+					p.setBarrelAngle(newAng);
 				} 
 				else if(key == KeyEvent.VK_SPACE) {
 					game.playerShoots();
 				}
 				else if(key == KeyEvent.VK_UP) {		// increase barrel angle
-					Player p = game.getPlayer();
 					double theta = p.getAngle();
 					p.setBarrelAngle(theta + 1);
 					angle.setText(Integer.toString((int)theta));
 				}
 				else if(key == KeyEvent.VK_DOWN) {		// decrease barrel angle
-					Player p = game.getPlayer();
 					double theta = p.getAngle();
 					p.setBarrelAngle(theta - 1);
 					angle.setText(Integer.toString((int)theta));
@@ -128,8 +127,6 @@ public class HUD extends JPanel {
 			}  
 			
 		}); 
-		
-		
 		JButton shoot = new JButton("Shoot!");
 		shoot.addActionListener(new ActionListener() {
 			@Override

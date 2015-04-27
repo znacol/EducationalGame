@@ -27,10 +27,7 @@ public abstract class Target {
 	{  
 		Shape a = getShape(); 
 		Shape b = t.getShape(); 
-		if(a.intersects(b.getBounds2D())) 
-			return true;
-
-		return false;
+		return a.intersects(b.getBounds2D()); 
 	}
 	
 	public abstract void draw(Graphics g);
@@ -38,10 +35,7 @@ public abstract class Target {
 	public boolean isHit(double barrelAngle) {
 		return minHittableAngle <= barrelAngle && barrelAngle <= maxHittableAngle;
 	}
-	
-//	public abstract void calcMinHitAngle(Point barrelBase);
-//	public abstract void calcMaxHitAngle(Point barrelBase);
-	
+		
 	public double getMinHitAngle() { return minHittableAngle; }
 	
 	public double getMaxHitAngle() { return maxHittableAngle; } 

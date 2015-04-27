@@ -24,11 +24,7 @@ public class TriangleTarget extends Target {
 		calcHitRange(playerCoord);
 	}
 	
-	private void calcHitRange(Point playerCoord) {
-		calcMaxMin(playerCoord);
-	}
-
-	private void calcMaxMin(Point barrelBase) {
+	private void calcHitRange(Point barrelBase) {
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
 		double temp[] = {0,0,0}; 
@@ -71,24 +67,10 @@ public class TriangleTarget extends Target {
 		
 		return false;
 	}
- 
-	// Moved to parent class
-	/*@Override
-	public boolean contains(Target t) {
-		Polygon pol = new Polygon(xPts, yPts, 3);
-		TriangleTarget other = (TriangleTarget)(t);
-		Polygon otherPol = new Polygon(other.xPts, other.yPts, 3); 
-		if(pol.intersects(otherPol.getBounds2D()))
-			return true; 
-		
-		return false;
-	}*/
 
-	// Should randomize color of target.
 	public void draw(Graphics g) {
 			g.setColor(color); 
-			g.fillPolygon(xPts, yPts, 3); 
-			
+			g.fillPolygon(xPts, yPts, 3); 	
 	}
 
 	public int getX() {return xPts[0];}
@@ -97,8 +79,7 @@ public class TriangleTarget extends Target {
 	public int getHeight() {return height;}
 
 	@Override
-	public Shape getShape() {
-		 
+	public Shape getShape() { 
 		return new Polygon(xPts, yPts, 3);
 	}
 

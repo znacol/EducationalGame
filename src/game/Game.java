@@ -68,7 +68,6 @@ public class Game extends JFrame {
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
 			int height = rand.nextInt(TAR_MAX) + TAR_MIN;   
 			Target tar = randomTarget(x,y,width,height,player.getBasePoint());
-			//Target tar = new RectangleTarget(x, y, width, height, player.getBasePoint());
 			// Loops through all targets and makes sure none contain new random tar
 			for(Target j : targets) {
 				if(j.contains(tar)) {
@@ -87,9 +86,9 @@ public class Game extends JFrame {
 		Random rand = new Random();  
 		switch(rand.nextInt(numTypesofTargets)) 
 		{ 
-		case 0: 
+			case 0: 
 			return new RectangleTarget(x, y, width, height, player.getBasePoint()); 
-		case 1: 
+			case 1: 
 			return new TriangleTarget(x, y, width, height, player.getBasePoint());  
 		}  
 		 
@@ -107,8 +106,10 @@ public class Game extends JFrame {
 				i = i - 1;	// go back one so you don't skip an element
 				
 				// If isChallenge turn and player does correctly, increment score.
-				if(isChallenge && challenge.checkChallenge(player))
+				if(isChallenge && challenge.checkChallenge(player)) {
 					player.addToScore(10);
+					hud.updateChallenge("Good Job! +10 Extra Points");
+				}
 				player.addToScore(10);		// If hit, increment score.
 				hud.updateScore();
 			}
@@ -123,7 +124,6 @@ public class Game extends JFrame {
 		}
 		repaint();
 	}
-	public void repaintGame() { repaint(); }
 	public ArrayList<Target> getTargets() { return targets; }
 	public Player getPlayer() { return player; }
 }

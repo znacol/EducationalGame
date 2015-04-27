@@ -46,13 +46,7 @@ public class Player {
 	// Return the calculated angle from the points forming the graphic barrel
 	public double checkAngle() {
 		double dx = (barrelEnd.getX() - barrelStart.getX());
-		// double dy = (barrelEnd.getY() - barrelStart.getY());
 		double cosCalc = Math.toDegrees(Math.acos(dx / barrelLength));
-		// double sinCalc = Math.toDegrees(Math.asin(dy / barrelLength));
-		// double avg = (Math.abs(cosCalc) + Math.abs(sinCalc)) / 2;
-		// avg = Math.round(avg); probably wouldn't want to round to compare to a double either
-		// returning cosCalc and not the average of arcsin and arccos calculations
-		// did not want to deal with arcsin and the difference in 1st and 2nd quandrants
 		return cosCalc;
 	}
 
@@ -89,7 +83,7 @@ public class Player {
 	// take in the new barrelAngle, set the instance's and then recalculate the endpoint for the barrel's line
 	public void setBarrelAngle(double barrelAngle) {
 		this.barrelAngle = barrelAngle;
-		barrelEnd = calcBarrelEnd(); // recalculate the endpoints for drawing the barrel
+		barrelEnd = calcBarrelEnd();
 	}
 
 }
