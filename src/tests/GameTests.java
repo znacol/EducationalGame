@@ -66,7 +66,7 @@ public class GameTests {
 				}
 			}
 			if(!check)
-				assertEquals(tars.size(), initTarsSize);		// Size of targets array should stay the same if always missing.
+				assertEquals(tars.size(), initTarsSize);		// When we changed targets to respawn as killed, this test became useless
 			check = false;
 		}
 	}

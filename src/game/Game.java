@@ -34,7 +34,7 @@ public class Game extends JFrame {
 	public static void main(String[] args){
 		String startMsg = "The angle of attack is formed by the cyan and green lines.\n" +
 				"Enter an angle and start shooting!\n" + 
-				"\nShortcuts: UP/DOWN Arrows Change Angle. Spacebar Shoots."; // Probably tell user about keyboard shortcuts
+				"\nKeyboard Shortcuts: \nUP/DOWN Arrows Change Angle. Spacebar Shoots."; // Probably tell user about keyboard shortcuts
 		JOptionPane.showMessageDialog(null, startMsg);
 		new Game();
 	}
@@ -67,7 +67,7 @@ public class Game extends JFrame {
 	public void spawnTargets() {
 		Random rand = new Random();
 		boolean contains = false;
-		for(int i = targets.size(); i < NUM_TARGETS; i++) {	// initially 0, but will respawn missing ones otherwise
+		while(targets.size() < NUM_TARGETS) {
 			int x = rand.nextInt(WIDTH - HUD_WIDTH - TAR_MAX) + 1;
 			int y = rand.nextInt(HEIGHT - 200) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
@@ -92,12 +92,12 @@ public class Game extends JFrame {
 		switch(rand.nextInt(numTypesofTargets)) 
 		{ 
 			case 0: 
-			return new RectangleTarget(x, y, width, height, player.getBasePoint()); 
+				return new RectangleTarget(x, y, width, height, player.getBasePoint()); 
 			case 1: 
-			return new TriangleTarget(x, y, width, height, player.getBasePoint());  
+				return new TriangleTarget(x, y, width, height, player.getBasePoint()); 
+			default:
+				return new RectangleTarget(x, y, width, height, player.getBasePoint());
 		}  
-		 
-		return randomTarget(x, y, width, height, player.getBasePoint());
 	}
 
 	public void playerShoots() {
