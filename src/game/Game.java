@@ -128,14 +128,14 @@ public class Game extends JFrame {
 					JOptionPane.showMessageDialog(null, msg);
 				}
 				player.addToScore(10);		// If hit, increment score.
-				hud.updateScore();
 			}
 			hud.getAnglePanel().requestFocusInWindow();
 		}
 		if(isChallenge && allMissed) {
-			player.addToScore(-20);
 			JOptionPane.showMessageDialog(null, "-10 Points, Challenge Missed!");
+			player.addToScore(-10);
 		}
+		hud.updateScore();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		int oneInFour = new Random().nextInt(4);
 		if(oneInFour == 0) {		// if random int is 0, (25% chance) then give a new challenge

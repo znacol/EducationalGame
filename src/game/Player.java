@@ -81,7 +81,7 @@ public class Player {
 		barrelColor = Color.GREEN;
 	}
 
-	public void addToScore(int score){ this.score += score; }
+	public void addToScore(int points){ this.score = score + points; }
 	public double getAngle() { return barrelAngle; }
 	public int getScore() { return score; }
 	public Point getBasePoint() { return barrelStart; }
