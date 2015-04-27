@@ -31,7 +31,6 @@ public class Game extends JFrame {
 	private boolean isChallenge;
 	private final int numTypesofTargets = 2;
 	
-
 	public static void main(String[] args){
 		new Game();
 	}
@@ -46,7 +45,7 @@ public class Game extends JFrame {
 	}
 
 	public void initGUI(){ 
-		setTitle("Geometry Game!");
+		setTitle("Angle Game!");
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
@@ -127,5 +126,4 @@ public class Game extends JFrame {
 	public void repaintGame() { repaint(); }
 	public ArrayList<Target> getTargets() { return targets; }
 	public Player getPlayer() { return player; }
-
 }

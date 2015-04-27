@@ -61,7 +61,6 @@ public class HUD extends JPanel {
 	
 	public void updateChallenge(String challengePrompt) {
 		challenge.setText(challengePrompt);
-		System.out.println(challengePrompt);
 	}
 
 	public JPanel anglePanel() {
@@ -90,25 +89,42 @@ public class HUD extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) { 
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_ENTER) {
 					String input = angle.getText();
 					int newAng = 0;
 					if (input.length() > 0) {
-						newAng = Integer.parseInt(angle.getText());
+						newAng = Integer.parseInt(angle.getText().trim());
 						game.repaintGame();
 					}
 					game.getPlayer().setBarrelAngle(newAng);
 				} 
-				else if(e.getKeyCode() == KeyEvent.VK_SPACE) 
+				else if(key == KeyEvent.VK_SPACE) {
 					game.playerShoots();
+				}
+				else if(key == KeyEvent.VK_UP) {		// increase barrel angle
+					Player p = game.getPlayer();
+					double theta = p.getAngle();
+					p.setBarrelAngle(theta + 1);
+					angle.setText(Integer.toString((int)theta));
+				}
+				else if(key == KeyEvent.VK_DOWN) {		// decrease barrel angle
+					Player p = game.getPlayer();
+					double theta = p.getAngle();
+					p.setBarrelAngle(theta - 1);
+					angle.setText(Integer.toString((int)theta));
+				}
+				game.repaint();
 			}
 
 			@Override
-			public void keyTyped(KeyEvent e) { 
+			public void keyReleased(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
 			}  
 			
 		}); 
