@@ -62,6 +62,8 @@ public class Player {
 		g.drawLine(x1, y1, x1 + 50, y1);	// draw a line with which the barrel will form the angle
 		g.setColor(Color.GREEN);
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
+		String theta = Integer.toString((int)Math.round(barrelAngle)) + "\u00b0";	// angle and degree symbol
+		g.drawString(theta, x1 - 10, y1 + 20);
 		
 		/*g.setColor(Color.RED);
 		int x3 = (int) barrelEnd.x;

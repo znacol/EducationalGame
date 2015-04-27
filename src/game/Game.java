@@ -108,22 +108,34 @@ public class Game extends JFrame {
 				t = null;	// how do we destroy the target?
 				i = i - 1;	// go back one so you don't skip an element
 				
-				// If isChallenge turn and player does correctly, increment score.
-				if(isChallenge && challenge.checkChallenge(player)) {
-					player.addToScore(10);
-					hud.updateChallenge("Good Job! +10 Extra Points");
+				if(isChallenge) {
+					String msg = "";
+					if(challenge.checkChallenge(player)) {
+						player.addToScore(10);
+						msg = "Challenge Successful, Good Job! +10 Extra Points";
+					}
+					else {
+						player.addToScore(-20);
+						msg = "-10 Points, Challenge Failed!";
+					}
+					JOptionPane.showMessageDialog(null, msg);
 				}
 				player.addToScore(10);		// If hit, increment score.
 				hud.updateScore();
 			}
 		}
-		NUM_TARGETS = targets.size();
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
-		
-		String chal = challenge.isChallengeTurn(targets.size()); 
-		if(chal != "") {
-			hud.updateChallenge(chal);
-			isChallenge = true;
+		int oneInFour = new Random().nextInt(4);
+		if(oneInFour == 0) {		// if random int is 0, (25% chance) then give a new challenge
+			String chal = challenge.getChallenge(); 
+			if(chal != "") {
+				hud.updateChallenge(chal);
+				isChallenge = true;
+			}
+		}
+		else {
+			hud.updateChallenge("");
+			isChallenge = false;	// turn challenge "off" after success/failure
 		}
 		repaint();
 	}
