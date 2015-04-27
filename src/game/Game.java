@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,6 +29,7 @@ public class Game extends JFrame {
 	private Player player;
 	private ArrayList<Target> targets;
 	private boolean isChallenge;
+	private final int numTypesofTargets = 2;
 	
 
 	public static void main(String[] args){
@@ -38,7 +40,7 @@ public class Game extends JFrame {
 		targets = new ArrayList<Target>();
 		player = new Player(250,600);
 		challenge = new Challenge();
-		isChallenge = false;
+		isChallenge = false; 
 		spawnTargets();
 		initGUI();
 	}
@@ -65,8 +67,9 @@ public class Game extends JFrame {
 			int x = rand.nextInt(WIDTH - HUD_WIDTH - TAR_MAX) + 1;
 			int y = rand.nextInt(HEIGHT - 200) + 1;
 			int width = rand.nextInt(TAR_MAX) + TAR_MIN;
-			int height = rand.nextInt(TAR_MAX) + TAR_MIN;
-			RectangleTarget tar = new RectangleTarget(x, y, width, height, player.getBasePoint());
+			int height = rand.nextInt(TAR_MAX) + TAR_MIN;   
+			Target tar = randomTarget(x,y,width,height,player.getBasePoint());
+			//Target tar = new TriangleTarget(x, y, width, height, player.getBasePoint());
 			// Loops through all targets and makes sure none contain new random tar
 			for(Target j : targets) {
 				if(j.contains(tar)) {
@@ -79,6 +82,19 @@ public class Game extends JFrame {
 				targets.add(tar);
 			contains = false;
 		}
+	}
+
+	private Target randomTarget(int x, int y, int width, int height, Point playerCoord) {
+		Random rand = new Random();  
+		switch(rand.nextInt() % numTypesofTargets) 
+		{ 
+		case 0: 
+			return new RectangleTarget(x, y, width, height, player.getBasePoint()); 
+		case 1: 
+			return new TriangleTarget(x, y, width, height, player.getBasePoint());  
+		}  
+		
+		return randomTarget(x, y, width, height, player.getBasePoint());
 	}
 
 	public void playerShoots() {

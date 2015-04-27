@@ -3,6 +3,7 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Shape;
 import java.util.Random;
 
 public abstract class Target {
@@ -22,7 +23,15 @@ public abstract class Target {
 
 	public abstract boolean contains(Point p);
 	
-	public abstract boolean contains(Target t);
+	public boolean contains(Target t) 
+	{  
+		Shape a = getShape(); 
+		Shape b = t.getShape(); 
+		if(a.intersects(b.getBounds2D())) 
+			return true;
+
+		return false;
+	}
 	
 	public abstract void draw(Graphics g);
 	
@@ -35,5 +44,7 @@ public abstract class Target {
 	
 	public double getMinHitAngle() { return minHittableAngle; }
 	
-	public double getMaxHitAngle() { return maxHittableAngle; }
+	public double getMaxHitAngle() { return maxHittableAngle; } 
+	
+	public abstract Shape getShape();
 }

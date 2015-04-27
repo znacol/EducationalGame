@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
@@ -130,8 +131,9 @@ public class RectangleTarget extends Target {
 			return true;
 		return false;
 	}
-
-	@Override
+ 
+	// Moved to parent class
+	/*@Override
 	public boolean contains(Target t) {
 		Rectangle rect = new Rectangle(x, y, width, height);
 		RectangleTarget other = (RectangleTarget)(t);
@@ -139,7 +141,7 @@ public class RectangleTarget extends Target {
 		if(rect.intersects(otherRect))
 			return true;
 		return false;
-	}
+	}*/
 
 	// Should randomize color of target.
 	public void draw(Graphics g) {
@@ -151,6 +153,11 @@ public class RectangleTarget extends Target {
 	public int getY() {return y;}
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
+
+	@Override
+	public Shape getShape() {
+		return new Rectangle(x,y,width,height);
+	}
 
 
 }

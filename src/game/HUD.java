@@ -39,7 +39,8 @@ public class HUD extends JPanel {
 		add(challengePanel);
 
 		anglePanel = anglePanel();
-		add(anglePanel);
+		add(anglePanel); 
+		
 	}
 	
 	public void updateScore() {
