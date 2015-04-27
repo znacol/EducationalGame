@@ -3,12 +3,12 @@ package game;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Game extends JFrame {
@@ -32,6 +32,9 @@ public class Game extends JFrame {
 	private final int numTypesofTargets = 2;
 	
 	public static void main(String[] args){
+		String startMsg = "The angle of attack is formed by the cyan and green lines.\n" +
+				"Enter an angle and start shooting!\n"; // Probably tell user about keyboard shortcuts
+		JOptionPane.showMessageDialog(null, startMsg);
 		new Game();
 	}
 

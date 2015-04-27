@@ -1,13 +1,10 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Random;
 
 public class RectangleTarget extends Target {
 	private int x;

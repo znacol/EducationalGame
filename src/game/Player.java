@@ -58,6 +58,9 @@ public class Player {
 		int y1 = (int) barrelStart.getY();
 		int x2 = (int) barrelEnd.getX();
 		int y2 = (int) barrelEnd.getY();
+		g.setColor(Color.cyan);
+		g.drawLine(x1, y1, x1 + 50, y1);	// draw a line with which the barrel will form the angle
+		g.setColor(Color.GREEN);
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 		
 		/*g.setColor(Color.RED);

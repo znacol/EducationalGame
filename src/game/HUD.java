@@ -102,6 +102,7 @@ public class HUD extends JPanel {
 				} 
 				else if(key == KeyEvent.VK_SPACE) {
 					game.playerShoots();
+					angle.setText(angle.getText().trim());
 				}
 				else if(key == KeyEvent.VK_UP) {		// increase barrel angle
 					double theta = p.getAngle();
@@ -117,15 +118,10 @@ public class HUD extends JPanel {
 			}
 
 			@Override
-			public void keyReleased(KeyEvent e) {
-				
-			}
+			public void keyReleased(KeyEvent e) {}
 
 			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}  
-			
+			public void keyTyped(KeyEvent e) {}  
 		}); 
 		JButton shoot = new JButton("Shoot!");
 		shoot.addActionListener(new ActionListener() {
