@@ -62,6 +62,11 @@ public class HUD extends JPanel {
 	public void updateChallenge(String challengePrompt) {
 		challenge.setText(challengePrompt);
 	}
+	
+	public JTextField getAnglePanel(){
+		angle.requestFocus();
+		return angle;
+	}
 
 	public JPanel anglePanel() {
 		JLabel label = new JLabel("Barrel Angle: ");
@@ -81,6 +86,7 @@ public class HUD extends JPanel {
 					game.repaint();
 				}
 				game.getPlayer().setBarrelAngle(newAng);
+				getAnglePanel().requestFocus();
 			} 
 			
 		});  
@@ -121,7 +127,8 @@ public class HUD extends JPanel {
 			public void keyReleased(KeyEvent e) {}
 
 			@Override
-			public void keyTyped(KeyEvent e) {}  
+			public void keyTyped(KeyEvent e) {}
+			
 		}); 
 		JButton shoot = new JButton("Shoot!");
 		shoot.addActionListener(new ActionListener() {
@@ -129,6 +136,7 @@ public class HUD extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				game.playerShoots();
 			}
+			
 		});
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(label);

@@ -60,6 +60,7 @@ public class Game extends JFrame {
 		add(playPanel, BorderLayout.CENTER);
 		getContentPane().setBackground(Color.black);
 		setVisible(true);
+		hud.getAnglePanel().requestFocus();
 	} 
 
 	public void spawnTargets() {
@@ -123,6 +124,7 @@ public class Game extends JFrame {
 				player.addToScore(10);		// If hit, increment score.
 				hud.updateScore();
 			}
+				hud.getAnglePanel().requestFocusInWindow();
 		}
 		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		int oneInFour = new Random().nextInt(4);
