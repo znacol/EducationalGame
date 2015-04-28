@@ -20,6 +20,14 @@ public class Missle {
 	
 	public double getX() {
 		return x;
+	} 
+	
+	public void setX(double x) { 
+		this.x = x;
+	} 
+	
+	public void setY(double y) { 
+		this.y = y;
 	}
 	
 	// move a certain number of pixels (VELOCITY) in the correct angle

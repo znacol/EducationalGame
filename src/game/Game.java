@@ -1,15 +1,21 @@
 package game;
 
+
+
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Game extends JFrame {
 	private int NUM_TARGETS = 10;
@@ -29,7 +35,11 @@ public class Game extends JFrame {
 	private Player player;
 	private ArrayList<Target> targets;
 	private boolean isChallenge;
-	private final int numTypesofTargets = 2;
+	private final int numTypesofTargets = 2;  
+	
+	private Missle missle; 
+	private Timer timer;
+	
 	
 	public static void main(String[] args){
 		String startMsg = "The angle of attack is formed by the cyan and green lines.\n" +
@@ -44,8 +54,11 @@ public class Game extends JFrame {
 		player = new Player(250,600);
 		challenge = new Challenge();
 		isChallenge = false; 
-		spawnTargets();
-		initGUI();
+		spawnTargets(); 
+		missle = new Missle(player.calcBarrelEnd().getX(), player.calcBarrelEnd().getY()); 
+		timer = new Timer(10, new TimerListener());
+		initGUI(); 
+		
 	}
 
 	public void initGUI(){ 
@@ -57,7 +70,7 @@ public class Game extends JFrame {
 		hud.setPreferredSize(new Dimension(HUD_WIDTH ,0));
 		add(hud, BorderLayout.WEST);
 
-		playPanel = new PlayPanel(targets, player);
+		playPanel = new PlayPanel(targets, player, missle, timer);
 		add(playPanel, BorderLayout.CENTER);
 		getContentPane().setBackground(Color.black);
 		setVisible(true);
@@ -100,12 +113,13 @@ public class Game extends JFrame {
 		return randomTarget(x, y, width, height, player.getBasePoint());
 	}
 
-	public void playerShoots() {
-		player.shoot();
-		repaint();
-		JOptionPane.showMessageDialog(null, "Laser Fired!");
-		player.doneShooting();
-		repaint();
+	public void playerShoots() { 
+		shootTheMissle();
+		//player.shoot();
+		//repaint();
+		//JOptionPane.showMessageDialog(null, "Laser Fired!");
+		//player.doneShooting(timer, missle);
+		//repaint(); 
 		double angle = player.getAngle();
 		boolean allMissed = true;
 		for(int i = 0; i < targets.size(); i++) {
@@ -152,5 +166,33 @@ public class Game extends JFrame {
 		}
 	}
 	public ArrayList<Target> getTargets() { return targets; }
-	public Player getPlayer() { return player; }
+	public Player getPlayer() { return player; } 
+	 
+	public void shootTheMissle() {
+		// velocity, angle etc. would go here
+		// do NOT put a loop in here; set end conditions in helper
+		timer.start();
+	}
+	
+	private void shootHelper() {
+		// more complex logic is probably needed to determine when to stop
+		if (missle.getY() < Missle.SIZE){
+			timer.stop();  
+			missle.setX(player.calcBarrelEnd().getX());  
+			missle.setY(player.calcBarrelEnd().getY());
+		}
+		else {
+			missle.move(player.checkAngle());
+		}
+	}
+	
+	private class TimerListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			// this is probably the only place you need a repaint
+			repaint(); 
+			// calls a helper to do most of the logic
+			shootHelper();
+		}
+	}
+	
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import javax.swing.Timer;
+
 public class Player {
 	private int score;
 	private double barrelAngle;
@@ -64,7 +66,8 @@ public class Player {
 		g.setColor(barrelColor);
 		g.drawLine(x1, y1, x2, y2);			// draw the line for the Barrel
 		String theta = Integer.toString((int)Math.round(barrelAngle)) + "\u00b0";	// angle and degree symbol
-		g.drawString(theta, x1 - 10, y1 + 20);	// draw the string representation of the barrelAngle
+		g.drawString(theta, x1 - 10, y1 + 20);	// draw the string representation of the barrelAngle 
+		
 	}
 
 	public void shoot() {
@@ -75,10 +78,15 @@ public class Player {
 		barrelColor = Color.RED;
 	}
 	
-	public void doneShooting() {
-		barrelLength = 75;
-		barrelEnd = calcBarrelEnd();
-		barrelColor = Color.GREEN;
+	public void doneShooting(Timer timer, Missle missle) { 
+		if(!timer.isRunning()) {
+			missle.setX(barrelEnd.getX());  
+			missle.setY(barrelEnd.getY()); 
+		}
+//		barrelLength = 75;
+//		barrelEnd = calcBarrelEnd();
+//		barrelColor = Color.GREEN; 
+		
 	}
 
 	public void addToScore(int points){ this.score = score + points; }
