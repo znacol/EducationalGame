@@ -66,7 +66,7 @@ public class GameTests {
 				}
 			}
 			if(!check)
-				assertEquals(tars.size(), initTarsSize);		// Size of targets array should stay the same if always missing.
+				assertEquals(tars.size(), initTarsSize);		// When we changed targets to respawn as killed, this test became useless
 			check = false;
 		}
 	}
@@ -101,6 +101,12 @@ public class GameTests {
 		
 		tarTwo = new RectangleTarget(25,25,5,5);
 		assertFalse(tarOne.contains(tarTwo));
+		
+		tarTwo = new TriangleTarget(0,0,15,15, new Point(0,0));
+		assertTrue(tarOne.contains(tarTwo));
+		
+		tarTwo = new TriangleTarget(100,100,10,10, new Point(0,0));
+		assertFalse(tarTwo.contains(tarOne));
 	}
 	
 	@Test	// that when barrelAngle is set, it changes to appropriate angle (including the gui coords)

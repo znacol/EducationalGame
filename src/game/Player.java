@@ -96,7 +96,7 @@ public class Player {
 
 	// take in the new barrelAngle, set the instance's and then recalculate the endpoint for the barrel's line
 	public void setBarrelAngle(double barrelAngle) {
-		this.barrelAngle = barrelAngle;
+		this.barrelAngle = barrelAngle % 360;
 		barrelEnd = calcBarrelEnd();
 	}
 }
