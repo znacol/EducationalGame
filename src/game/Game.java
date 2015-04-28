@@ -55,7 +55,7 @@ public class Game extends JFrame {
 		challenge = new Challenge();
 		isChallenge = false; 
 		spawnTargets(); 
-		missle = new Missle(player.calcBarrelEnd().getX(), player.calcBarrelEnd().getY()); 
+		missle = new Missle(player.calcBarrelEnd().getX(), player.calcBarrelEnd().getY(), player); 
 		timer = new Timer(10, new TimerListener());
 		initGUI(); 
 		
@@ -176,6 +176,7 @@ public class Game extends JFrame {
 		// velocity, angle etc. would go here
 		// do NOT put a loop in here; set end conditions in helper
 		timer.start();
+		
 	}
 	
 	private void shootHelper() {

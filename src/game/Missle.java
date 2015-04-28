@@ -8,10 +8,12 @@ public class Missle {
 	private double x, y;
 	public static int SIZE = 5;
 	public static int VELOCITY = 15;
+	private Player player;
 	
-	public Missle(double x, double y) {
+	public Missle(double x, double y, Player player) {
 		this.x = x;
 		this.y = y;
+		this.player = player;
 	}
 	
 	public double getY() {
@@ -39,6 +41,7 @@ public class Missle {
 
 	public void draw(Graphics g) {
 		g.setColor(Color.YELLOW);
-		g.fillOval((int)x, (int)y, SIZE, SIZE);
+		double rad = player.getAngle();
+		g.drawLine((int)x, (int)y, (int)(x + Math.cos(Math.toRadians(rad)) * 800), (int)(y + Math.sin(-Math.toRadians(rad)) * 800));
 	}
 }

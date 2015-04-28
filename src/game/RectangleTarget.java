@@ -32,7 +32,11 @@ public class RectangleTarget extends Target {
 		calcHitRange(playerCoord);
 	}
 	/*
-	 * test max and min angle for the four coners of the square
+	 * test max and min angle for the four corners of the square
+	 * case 1 top left
+	 * case 2 top right
+	 * case 3 bottom left
+	 * case 4 bottom right
 	*/
 	private void calcHitRange(Point barrelBase) {
 		double baseX = barrelBase.getX();

@@ -84,7 +84,7 @@ public class HUD extends JPanel {
 				int newAng = 0;
 				if(input.length() > 0) {
 					newAng = Integer.parseInt(angle.getText());
-					game.repaint();
+				//	game.repaint();
 				}
 				game.getPlayer().setBarrelAngle(newAng);
 				getAnglePanel().requestFocus();

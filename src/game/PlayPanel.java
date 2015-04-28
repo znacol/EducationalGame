@@ -43,5 +43,7 @@ public class PlayPanel extends JPanel {
 		} 
 		else
 			missle.draw(g);
+		
+		
 	}  
 }
