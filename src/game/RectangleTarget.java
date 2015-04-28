@@ -31,7 +31,9 @@ public class RectangleTarget extends Target {
 		this.height = height;
 		calcHitRange(playerCoord);
 	}
-
+	/*
+	 * test max and min angle for the four coners of the square
+	*/
 	private void calcHitRange(Point barrelBase) {
 		double baseX = barrelBase.getX();
 		double baseY = barrelBase.getY();
@@ -57,6 +59,12 @@ public class RectangleTarget extends Target {
 		maxHittableAngle = temp[3];
 	}
 	
+	/* ArcTan calculates a positive angle from 0-90, range needed 0 to 180
+	 * if dx is larger than zero it is an obtuse angle
+	 * to adjust for this subtract angle from 90 mult by 2
+	 * add it to original angle to get angle past 90
+	 * If dx is negative simply take abs 
+	 * */
 	public double calculations(double dx, double dy){
 		boolean setPast = false;
 		if(dx > 0){
