@@ -6,8 +6,8 @@ import java.awt.Graphics;
 public class Missle {
 
 	private double x, y;
-	public static int SIZE = 10;
-	public static int VELOCITY = 10;
+	public static int SIZE = 5;
+	public static int VELOCITY = 15;
 	
 	public Missle(double x, double y) {
 		this.x = x;
@@ -34,13 +34,7 @@ public class Missle {
 	public void move(double barrelAngle) {
 		double rad = Math.toRadians(barrelAngle);
 		y -= VELOCITY * Math.sin(rad);	// ball should always go up if angle is between 0 and 180
-		// ball should move right if 0 <= barrelAngle <= 90, left if 90 < barrelAngle <= 180  
-		if(rad < Math.PI / 2) {
-			x += VELOCITY * Math.cos(rad);
-		}
-		else {
-			x -= VELOCITY * Math.cos(rad);
-		}
+		x += (VELOCITY * Math.cos(rad));
 	}
 
 	public void draw(Graphics g) {

@@ -115,43 +115,47 @@ public class Game extends JFrame {
 
 	public void playerShoots() { 
 		shootTheMissle();
-		//player.shoot();
-		//repaint();
-		//JOptionPane.showMessageDialog(null, "Laser Fired!");
-		//player.doneShooting(timer, missle);
-		//repaint(); 
 		double angle = player.getAngle();
 		boolean allMissed = true;
+		String msg = "";
+		int challengeMultiplier = 0;
+		ArrayList<Target> hitTars = new ArrayList<Target>();
 		for(int i = 0; i < targets.size(); i++) {
 			Target t = targets.get(i);
 			if(t.isHit(angle)) {
 				allMissed = false;
-				targets.remove(i);
-				t = null;	// how do we destroy the target?
-				i = i - 1;	// go back one so you don't skip an element
-				
+				hitTars.add(t);
 				if(isChallenge) {
-					String msg = "";
 					if(challenge.checkChallenge(player)) {
 						player.addToScore(10);
-						msg = "Challenge Successful, Good Job! +10 Extra Points";
+						challengeMultiplier++;
+						if(challengeMultiplier == 1) {
+							msg = "Challenge Successful, Good Job! +10 Extra Points";	
+						} else {
+							msg = challengeMultiplier + " challenge hits: +" + (20 * challengeMultiplier) + " Points!!";
+						}
 					}
 					else {
 						player.addToScore(-20);
 						msg = "-10 Points, Challenge Failed!";
 					}
-					JOptionPane.showMessageDialog(null, msg);
 				}
 				player.addToScore(10);		// If hit, increment score.
 			}
 			hud.getAnglePanel().requestFocusInWindow();
 		}
-		if(isChallenge && allMissed) {
-			JOptionPane.showMessageDialog(null, "-10 Points, Challenge Missed!");
-			player.addToScore(-10);
+		for(Target hit : hitTars) {
+			targets.remove(hit);
+		}
+		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
+		if(isChallenge) {
+			if(allMissed) {
+				player.addToScore(-10);
+				msg = "-10 Points, Challenge Missed!";
+			}
+			JOptionPane.showMessageDialog(null, msg);
 		}
 		hud.updateScore();
-		spawnTargets(); // respawn targets, for NUM_TARGETS - targets.size()
 		int oneInFour = new Random().nextInt(4);
 		if(oneInFour == 0) {		// if random int is 0, (25% chance) then give a new challenge
 			String chal = challenge.getChallenge(); 

@@ -27,8 +27,6 @@ public class PlayPanel extends JPanel {
 		this.targets = targets;  
 		this.missle = missle; 
 		this.timer = timer;
-		/*missle = new Missle(player.calcBarrelEnd().getX(), player.calcBarrelEnd().getY()); 
-		timer = new Timer(10, new TimerListener());*/
 		setBorder(new EtchedBorder());
 		setBackground(Color.BLACK);
 	}
@@ -42,34 +40,8 @@ public class PlayPanel extends JPanel {
 		if(!timer.isRunning()) {
 			missle.setX(player.calcBarrelEnd().getX());  
 			missle.setY(player.calcBarrelEnd().getY());  
-			missle.draw(g);
 		} 
 		else
 			missle.draw(g);
 	}  
-	
-	/*public void shootTheMissle() {
-		// velocity, angle etc. would go here
-		// do NOT put a loop in here; set end conditions in helper
-		timer.start();
-	}
-	
-	private void shootHelper() {
-		// more complex logic is probably needed to determine when to stop
-		if (missle.getY() < missle.SIZE)
-			timer.stop();
-		else {
-			missle.move(player.checkAngle());
-		}
-	}
-	
-	private class TimerListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			// this is probably the only place you need a repaint 
-			shootHelper();
-			repaint(); 
-			// calls a helper to do most of the logic
-			shootHelper();
-		}
-	}*/
 }
