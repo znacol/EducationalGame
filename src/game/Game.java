@@ -38,7 +38,9 @@ public class Game extends JFrame {
 	private final int numTypesofTargets = 2;  
 	
 	private Missle missle; 
-	private Timer timer;
+	private Timer timer; 
+	
+	private Timer gameTimer;
 	
 	
 	public static void main(String[] args){

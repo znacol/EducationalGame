@@ -12,9 +12,11 @@ import java.awt.event.KeyListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 public class HUD extends JPanel {
 	public final static int WIDTH = 50;
@@ -24,7 +26,11 @@ public class HUD extends JPanel {
 	private JPanel challengePanel, anglePanel;
 	private JLabel score;
 	private JTextField angle;
-	private JTextArea challenge;
+	private JTextArea challenge; 
+	private JTextField timeRemaining; 
+	private String timeString = "Time Remaining: "; 
+	private int timeLeft = 90; 
+	private Timer countDownTimer;
 
 	public HUD(Game game) {
 		this.game = game;
@@ -32,17 +38,48 @@ public class HUD extends JPanel {
 		setMaximumSize(new Dimension(25, 500));
 		
 		score = new JLabel("Score: 0");
-		add(score);
+		add(score); 
+		 
+		countDownTimer = new Timer(1000, new TimeListener());  
+		timeRemaining = timeRemainingLabel();
+		add(timeRemaining);  
+		countDownTimer.start();
 
 		challengePanel = challengePanel();
 		
 		add(challengePanel);
 
 		anglePanel = anglePanel();
-		add(anglePanel); 
+		add(anglePanel);  
+		
+		
 		
 	}
 	
+	private JTextField timeRemainingLabel() {
+		JTextField time = new JTextField(timeString + timeLeft); 
+		time.setEditable(false);
+		return time;
+	} 
+	
+	private class TimeListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {  
+			if (timeLeft <= 0) {
+				countDownTimer.stop();
+				String endMsg = "Game Over! " + "Score: "
+						+ game.getPlayer().getScore();
+				JOptionPane.showMessageDialog(null, endMsg); 
+				System.exit(0); 
+			} else {
+				timeLeft -= 1;
+				timeRemaining.setText(timeString + timeLeft);
+			}
+		} 
+		
+	}
+
 	public void updateScore() {
 		score.setText("Score: " + game.getPlayer().getScore());
 	}
